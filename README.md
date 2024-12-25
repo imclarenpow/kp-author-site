@@ -1,6 +1,6 @@
 # Repo for Metamorph / Keryn Powell Author Website
 
-[Site Preview](https://html-preview.github.io/?url=https://github.com/imclarenpow/kp-author-site/blob/main/site.html)
+[Site Preview](https://html-preview.github.io/?url=https://github.com/imclarenpow/kp-author-site/blob/main/index.html)
 
 ## Development Log
 
