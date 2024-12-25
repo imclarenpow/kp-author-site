@@ -18,3 +18,7 @@
 #### Design
 
 - Next - will have conversation around this with client (Mum lol).
+
+#### Familiarisation
+
+- Added some files to test how GitHub pages works. Many thanks to Stack Overflow for providing this info.
