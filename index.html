@@ -11,13 +11,14 @@
         <!-- These ones aren't as imporant -->
         <meta name="keywords" content="Keryn Powell, Author, New Zealand Author, Keryn Powell Author">
         <meta name="author" content="Isaac Powell">
-
+        <!-- populate books script -->
+        <script src="assets/scripts/populatebooks.js"></script>
     </head>
     <body>
         <header class="header">
             <!-- when adding js - add in img size depending on pixels wide of device / resolution -->
             <a href="index.html">
-                <img src="assets/img/logo-white-sml.png" alt="Frog Logo for Keryn Powell">
+                <img src="assets/img/logo/white-sml.png" alt="Frog Logo for Keryn Powell">
             </a>
             <h1>Keryn Powell</h1>
             <nav class="nav-links">
@@ -30,10 +31,15 @@
                 <a href="http://www.instagram.com/kerynpowellauthor/" class="fa fa-instagram"></a>
             </div>
         </header>
-        
-
+        <!-- all content on the page goes in here -->
+        <div id="page-container">
+            <div id="library">
+                <!-- elements added by /assets/scripts/populatebooks.js -->
+            </div>
+        </div>
     </body>
+    <!-- add to in future with links etc, also add to other pages. -->
     <footer>
-
+        <p>Site By: <a href="">Isaac Powell</a></p>
     </footer>
 </html>

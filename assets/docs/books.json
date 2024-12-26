@@ -1,0 +1,11 @@
+{
+    "books":[
+        {"title":"Title",
+        "subtitle":"Subtitle",
+        "series":"Name of Series",
+        "date": "Date of Publication / Expected Date",
+        "blurb":"Blurb Information goes here - lorem ipsum etc etc etc etc.",
+        "cover":"temp.png"
+        }
+    ]
+}
