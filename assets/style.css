@@ -9,6 +9,7 @@ body {
 #header {
   background-color: #14281d;
   color: #eef6fc;
+  min-width: 270px;
 }
 #header h1 {
   justify-self: center;
@@ -48,11 +49,108 @@ body {
 
 /* stuff in the page */
 #page-container {
-  min-width: 500px;
-  max-width: 750px;
+  min-width: 250px;
   display: grid;
   margin: auto;
   place-items: center;
+  padding: 10px;
+}
+/* book css */
+.book {
+  max-width: 500px;
+  padding: 15px;
+  margin: 10px;
+  border: 2px solid #b8c5d6;
+}
+.book > img {
+  max-width: 100%;
+  height: auto;
+}
+/* mailchimp signup */
+#mc_embed_shell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+#mc_embed_signup {
+  max-width: 500px;
+  width: 100%;
+  border: 2px solid #b8c5d6;
+  padding: 20px;
+}
+
+#mc_embed_signup h3 {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #14281d;
+  cursor: default;
+}
+
+.indicates-required {
+  cursor: default;
+  text-align: right;
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.mc-field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.mc-field-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 0.95em;
+  color: #28293e;
+}
+
+.mc-field-group input {
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #b8c5d6;
+}
+
+#mc-embedded-subscribe {
+  background: #355834;
+  color: #eef6fc;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+#mc-embedded-subscribe:hover {
+  background-color: #28293e;
+  border-bottom: 2px solid #b8c5d6;
+  color: #b8c5d6;
+}
+
+.helper_text {
+  font-size: 0.85em;
+  color: #b8c5d6;
+  margin-top: 5px;
+}
+
+.clear.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.refferal_badge {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px;
+  height: auto;
 }
 
 /* footer css */

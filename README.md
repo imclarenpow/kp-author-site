@@ -26,6 +26,7 @@
 
 - Spoke to Mum, will use simple web design for easy navigation.
 - Will use good contrasting colour palette
+- All book covers should be 100px wide
 
 #### Familiarisation
 
@@ -45,3 +46,12 @@
 - css for footer (not that important)
 - 1 book's info added to json - need more further down the line.
 - all images have been added and resized so far.
+
+### Day 2
+
+Further development.
+
+#### Progress Made
+
+- Added css to books on front page.
+- Added css to newsletter signup
