@@ -8,8 +8,8 @@
 
 - Change the nav references once domain is set up.
 - Add robots.txt information
-- Add CSS once website layout has been confirmed.
 - Add sorting to the books
+- Need to add links to purchase books
 
 ### Day 1 - Scoping, Design & Decision Making
 
@@ -37,6 +37,11 @@
 - Resized image assets that will be used.
 - Spoken to Mum about what information we need and created a mock design for the homepage.
 - Set up a mailchimp account to manage newsletter.
-- Added Social Media Links to page.
+- created a colour palette
+- Social Media Links to page.
 - Added necessary files that will be added to in time such as the stylesheet and robots file.
-- Added script to populate book section on site based on what has been added to the json.
+- Script to populate book section on site based on what has been added to the json.
+- css for page header
+- css for footer (not that important)
+- 1 book's info added to json - need more further down the line.
+- all images have been added and resized so far.

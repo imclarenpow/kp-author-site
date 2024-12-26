@@ -47,15 +47,15 @@ async function populateBooks() {
             seriesParagraph.className = 'series';
             bookDiv.appendChild(seriesParagraph);
 
-            // date
-            const dateParagraph = document.createElement('p');
-            dateParagraph.textContent = book.date;
-            dateParagraph.className = 'date';
-            bookDiv.appendChild(dateParagraph);
+            // year
+            const yearParagraph = document.createElement('p');
+            yearParagraph.textContent = book.year;
+            yearParagraph.className = 'year';
+            bookDiv.appendChild(yearParagraph);
 
             // blurb
             const blurbParagraph = document.createElement('p');
-            blurbParagraph.textContent = book.blurb;
+            blurbParagraph.innerHTML = book.blurb.replace('\n', '<br>');
             blurbParagraph.className = 'blurb';
             bookDiv.appendChild(blurbParagraph);
 

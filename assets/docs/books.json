@@ -1,10 +1,16 @@
 {
     "books":[
-        {"title":"Title",
-        "subtitle":"Subtitle",
-        "series":"Name of Series",
-        "date": "Date of Publication / Expected Date",
-        "blurb":"Blurb Information goes here - lorem ipsum etc etc etc etc.",
+        {"title":"Before the Rising",
+        "subtitle":"Some legends are real. Almost.",
+        "series":"The Rising Series",
+        "year": "2022",
+        "blurb":"Pania didnt stay on the reef, pining for her lover. She made it back to shore; a secret that has been faithfully kept for generations. But now, one descendant needs to know the truth in order to prevent a catastrophe.\nEighteen-year-old Rebecca didnt expect to spend her summer with a mysterious sea-dwelling community training for an impossible task.\nMartin is just trying to finish his PhD on dolphins. Instead he becomes mixed up in and end-of-the-world conspiracy that defies all scientific principles.\nAs the extraordinary truth is revealed Rebecca and Martin must each decide what to believe and who to trust.\nAnd ultimately, who to save…",
+        "cover":"beforetherising.jpg"
+        },{"title":"Placeholder Book",
+        "subtitle":"This is a placeholder",
+        "series":"Placeholder Series",
+        "year": "2025",
+        "blurb":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nPraesent lobortis, libero eget viverra consectetur, enim ipsum blandit nisi, commodo tempor ipsum dolor non risus. Sed tempor quis risus sed tempus.\nSuspendisse finibus, sapien vitae dignissim tincidunt, mi mauris egestas neque, at scelerisque mi metus ac orci.\nDuis a fringilla eros, ac accumsan sapien. Pellentesque iaculis pellentesque ipsum ut congue. Aliquam vehicula diam eu dui sagittis laoreet.\nNam ac ultricies lectus. Praesent quis nibh ornare, sagittis felis id, fermentum mauris. Phasellus quis ante sit amet dui semper volutpat ut eget eros.\nPhasellus porttitor risus turpis, sed semper nibh auctor eget. Sed.",
         "cover":"temp.png"
         }
     ]
