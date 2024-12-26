@@ -17,8 +17,18 @@
 
 #### Design
 
-- Next - will have conversation around this with client (Mum lol).
+- Spoke to Mum, will use simple web design for easy navigation.
+- Will use good contrasting colour palette
 
 #### Familiarisation
 
 - Added some files to test how GitHub pages works. Many thanks to Stack Overflow for providing this info.
+
+#### Progress Made
+
+- Created boilerplate elements such as the navbar in html.
+- Resized image assets that will be used.
+- Spoken to Mum about what information we need and created a mock design for the homepage.
+- Set up a mailchimp account to manage newsletter.
+- Added Social Media Links to page.
+- Added necessary files that will be added to in time such as the stylesheet and robots file.
