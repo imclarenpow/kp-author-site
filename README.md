@@ -58,3 +58,11 @@ Further development.
 - Added show more / less link and some css around it.
 - Added to about page
 - Today was to make the pages fit properly on different screens mainly
+
+### Day 3
+
+Further development.
+
+#### Progress Made
+
+- Changed header h1 from justify-self to text-align to fix issue where header displayed on left on mobile.
