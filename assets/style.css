@@ -167,6 +167,7 @@ body {
 #about-headshot {
   max-width: 40%;
   min-width: 200px;
+  max-height: 74.2vh;
   padding: 10px;
 }
 #about-text {
