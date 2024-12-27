@@ -48,7 +48,7 @@ body {
 }
 
 /* stuff in the page */
-#page-container {
+.page-container {
   min-width: 250px;
   display: grid;
   margin: auto;
@@ -66,6 +66,24 @@ body {
   max-width: 100%;
   height: auto;
 }
+.title {
+  margin: 0;
+}
+.subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.blurb {
+  max-height: 3.8em; /* Approximate height for 50 characters */
+  overflow: hidden;
+  transition: max-height 0.3s ease; /* Smooth height animation */
+}
+.blurb.expanded {
+  max-height: 100vh; /* Set a large enough height to show full content */
+}
+.toggle-blurb {
+  color: #355834;
+}
 /* mailchimp signup */
 #mc_embed_shell {
   display: flex;
@@ -73,6 +91,7 @@ body {
   align-items: center;
   padding: 20px;
   width: 100%;
+  min-width: 270px;
 }
 #mc_embed_signup {
   max-width: 500px;
@@ -96,26 +115,22 @@ body {
   color: #555;
   margin-bottom: 5px;
 }
-
 .mc-field-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
 }
-
 .mc-field-group label {
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 0.95em;
   color: #28293e;
 }
-
 .mc-field-group input {
   padding: 10px;
   font-size: 1em;
   border: 2px solid #b8c5d6;
 }
-
 #mc-embedded-subscribe {
   background: #355834;
   color: #eef6fc;
@@ -126,33 +141,45 @@ body {
   width: 100%;
   transition: background 0.3s ease;
 }
-
 #mc-embedded-subscribe:hover {
   background-color: #28293e;
   border-bottom: 2px solid #b8c5d6;
   color: #b8c5d6;
 }
-
 .helper_text {
   font-size: 0.85em;
   color: #b8c5d6;
   margin-top: 5px;
 }
-
 .clear.foot {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
-
 .refferal_badge {
   display: block;
   margin: 0 auto;
   max-width: 220px;
   height: auto;
 }
-
+/* about css */
+#about-headshot {
+  max-width: 40%;
+  min-width: 200px;
+  padding: 10px;
+}
+#about-text {
+  max-width: 40%;
+  min-width: 200px;
+  padding: 10px;
+}
+#about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
 /* footer css */
 footer > * {
   background-color: #28293e;

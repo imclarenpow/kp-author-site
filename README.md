@@ -55,3 +55,6 @@ Further development.
 
 - Added css to books on front page.
 - Added css to newsletter signup
+- Added show more / less link and some css around it.
+- Added to about page
+- Today was to make the pages fit properly on different screens mainly

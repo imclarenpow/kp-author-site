@@ -43,23 +43,47 @@ async function populateBooks() {
 
             // series
             const seriesParagraph = document.createElement('p');
-            seriesParagraph.textContent = book.series;
+            seriesParagraph.innerHTML = "<b>Series:</b> "+ book.series;
             seriesParagraph.className = 'series';
             bookDiv.appendChild(seriesParagraph);
 
             // year
             const yearParagraph = document.createElement('p');
-            yearParagraph.textContent = book.year;
-            yearParagraph.className = 'year';
+            yearParagraph.innerHTML = "<b>Publication Date:</b> "+ book.year;
+            yearParagraph.className = 'book-year';
             bookDiv.appendChild(yearParagraph);
 
             // blurb
             const blurbParagraph = document.createElement('p');
-            blurbParagraph.innerHTML = book.blurb.replace('\n', '<br>');
             blurbParagraph.className = 'blurb';
+
+            blurbParagraph.textContent = book.blurb;
             bookDiv.appendChild(blurbParagraph);
 
-            // Append the book to the container
+            // "Show More"/"Show Less" link
+            if (book.blurb.length > 100) {
+                const toggleLink = document.createElement('a');
+                toggleLink.href = '#';
+                toggleLink.textContent = 'Show More';
+                toggleLink.className = 'toggle-blurb';
+
+                toggleLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                
+                    if (blurbParagraph.classList.contains('expanded')) {
+                        // Collapse
+                        blurbParagraph.classList.remove('expanded');
+                        toggleLink.textContent = 'Show More';
+                    } else {
+                        // Expand
+                        blurbParagraph.classList.add('expanded');
+                        toggleLink.textContent = 'Show Less';
+                    }
+                });
+
+                bookDiv.appendChild(toggleLink);
+            }
+
             container.appendChild(bookDiv);
         });
     } catch (error) {
@@ -69,3 +93,4 @@ async function populateBooks() {
 
 // Call the function to populate books
 document.addEventListener('DOMContentLoaded', populateBooks);
+
