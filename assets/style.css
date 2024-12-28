@@ -55,12 +55,23 @@ body {
   place-items: center;
   padding: 10px;
 }
+#searchBar {
+  border: 2px solid #b8c5d6;
+  padding: 5px;
+  color: #14281d;
+}
+#searchBar::placeholder {
+  color: #355834;
+}
 /* book css */
 .book {
   max-width: 500px;
   padding: 15px;
   margin: 10px;
   border: 2px solid #b8c5d6;
+}
+.has-button {
+  padding-bottom: 25px;
 }
 .book > img {
   max-width: 100%;
@@ -81,8 +92,29 @@ body {
 .blurb.expanded {
   max-height: 100vh; /* Set a large enough height to show full content */
 }
-.toggle-blurb {
+.toggle-blurb,
+.link {
   color: #355834;
+}
+.toggle-blurb:hover,
+.link:hover {
+  color: #14281d;
+  text-decoration: none;
+}
+.buy-link {
+  background: #355834;
+  color: #eef6fc;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+.buy-link:hover {
+  background-color: #28293e;
+  border-bottom: 2px solid #b8c5d6;
+  color: #b8c5d6;
 }
 /* mailchimp signup */
 #mc_embed_shell {
@@ -180,6 +212,10 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   box-sizing: border-box;
+}
+#article-links {
+  margin: 0 20px;
+  padding: 0;
 }
 /* footer css */
 footer > * {

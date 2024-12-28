@@ -66,3 +66,14 @@ Further development.
 #### Progress Made
 
 - Changed header h1 from justify-self to text-align to fix issue where header displayed on left on mobile.
+- Added list of articles to about of website
+- Added css to list
+
+### Day 4
+
+Further Development.
+
+#### Progress Made
+
+- Added Search Bar for Page
+- Added links to books
