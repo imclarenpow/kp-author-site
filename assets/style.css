@@ -1,18 +1,31 @@
+/* GENERAL ELEMENTS */
 * {
   font-family: "DM Sans", serif;
   font-optical-sizing: auto;
 }
-/* header css */
 body {
   margin: 0;
 }
+footer > * {
+  background-color: #28293e;
+  margin: 0;
+  padding: 10px 0;
+}
+footer > p > a, footer > * {
+  color: #f9f2dc;
+}
+footer > p > a:hover {
+  color: #eef6fc;
+  text-decoration: none;
+}
+
+/* HEADER */
 #header {
   background-color: #14281d;
   color: #eef6fc;
   min-width: 270px;
 }
 #header h1 {
-  text-align: center;
   margin-top: 0;
   cursor: default;
 }
@@ -21,6 +34,8 @@ body {
   display: block;
   max-width: 150px;
 }
+
+/* NAVBAR */
 #navbar {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -38,7 +53,7 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
 }
-.fa {
+.text-align {
   text-align: center;
 }
 #navbar a:hover {
@@ -47,7 +62,7 @@ body {
   color: #b8c5d6;
 }
 
-/* stuff in the page */
+/* PAGE CONTENT */
 .page-container {
   min-width: 250px;
   display: grid;
@@ -55,15 +70,29 @@ body {
   place-items: center;
   padding: 10px;
 }
+
+/* HOME PAGE SPECIFIC */
 #searchBar {
   border: 2px solid #b8c5d6;
+  font-size: 1em;
   padding: 5px;
   color: #14281d;
 }
 #searchBar::placeholder {
   color: #355834;
 }
-/* book css */
+#library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0px;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* BOOKS */
 .book {
   max-width: 500px;
   padding: 15px;
@@ -74,8 +103,11 @@ body {
   padding-bottom: 25px;
 }
 .book > img {
+  width: 100%;
   max-width: 100%;
   height: auto;
+  max-height: 54vh;
+  object-fit: contain;
 }
 .title {
   margin: 0;
@@ -85,12 +117,12 @@ body {
   font-size: 1.1rem;
 }
 .blurb {
-  max-height: 3.8em; /* Approximate height for 50 characters */
+  max-height: 3.8em;
   overflow: hidden;
-  transition: max-height 0.3s ease; /* Smooth height animation */
+  transition: max-height 0.3s ease;
 }
 .blurb.expanded {
-  max-height: 100vh; /* Set a large enough height to show full content */
+  max-height: 100vh;
 }
 .toggle-blurb,
 .link {
@@ -116,7 +148,8 @@ body {
   border-bottom: 2px solid #b8c5d6;
   color: #b8c5d6;
 }
-/* mailchimp signup */
+
+/* NEWS PAGE SPECIFIC */
 #mc_embed_shell {
   display: flex;
   justify-content: center;
@@ -131,7 +164,6 @@ body {
   border: 2px solid #b8c5d6;
   padding: 20px;
 }
-
 #mc_embed_signup h3 {
   text-align: center;
   font-size: 1.5em;
@@ -139,7 +171,6 @@ body {
   color: #14281d;
   cursor: default;
 }
-
 .indicates-required {
   cursor: default;
   text-align: right;
@@ -195,7 +226,8 @@ body {
   max-width: 220px;
   height: auto;
 }
-/* about css */
+
+/* ABOUT PAGE */
 #about-headshot {
   max-width: 40%;
   min-width: 200px;
@@ -216,19 +248,4 @@ body {
 #article-links {
   margin: 0 20px;
   padding: 0;
-}
-/* footer css */
-footer > * {
-  background-color: #28293e;
-  color: #f9f2dc;
-  margin: 0;
-  padding: 10px 0;
-  text-align: center;
-}
-footer > p > a {
-  color: #f9f2dc;
-}
-footer > p > a:hover {
-  color: #eef6fc;
-  text-decoration: none;
 }

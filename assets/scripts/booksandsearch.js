@@ -11,10 +11,9 @@ async function books() {
         const books = data.books;
 
         // create search input element
-        
         const searchBar = document.createElement('input');
         searchBar.type = 'text';
-        searchBar.placeholder = 'Search books...';
+        searchBar.placeholder = 'Search';
         searchBar.id = 'searchBar';
         // get library div to add books to.
         const container = document.querySelector('#library');
@@ -40,6 +39,7 @@ async function books() {
             coverImg.alt = `${book.title} Cover`;
             coverImg.className = 'cover';
             bookDiv.appendChild(coverImg);
+            // div for other content
 
             // title
             const titleHeading = document.createElement('h2');

@@ -77,3 +77,14 @@ Further Development.
 
 - Added Search Bar for Page
 - Added links to books
+
+### Day 5
+
+Further Development
+
+#### Progress Made
+
+- Added Grid css for books
+- Changed around how the search bar appears
+- Cleaned up CSS somewhat
+- still cracking
