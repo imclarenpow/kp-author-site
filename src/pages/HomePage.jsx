@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import BookDetailsModal from '../components/books/BookDetailsModal'
 import BookGrid from '../components/books/BookGrid'
 import './HomePage.css'
@@ -75,7 +75,7 @@ function HomePage() {
         setSelectedBook(book)
     }
 
-    function handleModalClose() {
+    const handleModalClose = useCallback(() => {
         if (!selectedBook || isModalClosing) {
             return
         }
@@ -88,7 +88,7 @@ function HomePage() {
             setIsModalClosing(false)
             closeTimeoutRef.current = null
         }, BOOK_MODAL_ANIMATION_MS)
-    }
+    }, [selectedBook, isModalClosing])
 
     return (
         <section className="page-container home-page-container">
