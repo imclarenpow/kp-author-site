@@ -53,7 +53,12 @@
   border: 1px solid #b8c5d6;
   background-color: var(--color-forest);
   border-color: #9fb4ca;
-  color: #b8c5d6;
+  color: #eef6fc;
+}
+
+.book-modal-close:focus-visible {
+  outline: 3px solid #9fb4ca;
+  outline-offset: 2px;
 }
 
 .book-modal-content {
@@ -108,6 +113,11 @@
   font-weight: 500;
 }
 
+.book-modal-link:focus-visible {
+  outline: 3px solid #9fb4ca;
+  outline-offset: 2px;
+}
+
 .book-modal-link-primary {
   background: #355834;
   color: #eef6fc;
@@ -127,6 +137,7 @@
 .book-modal-link-secondary:hover,
 .book-modal-link-secondary:focus-visible {
   color: #14281d;
+  background-color: #eef6fc;
   border-color: #9fb4ca;
 }
 

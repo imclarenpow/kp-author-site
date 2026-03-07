@@ -3,6 +3,18 @@ import './BookCover.css'
 import './BookDetailsModal.css'
 
 const MIN_SCALE_FACTOR = 0.2
+const FOCUSABLE_SELECTOR =
+    'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+function getFocusableElements(container) {
+    if (!container) {
+        return []
+    }
+
+    return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+        (element) => element.getClientRects().length > 0,
+    )
+}
 
 function getOriginTransform(originRect, modalRect) {
     const originCenterX = originRect.left + originRect.width / 2
@@ -20,6 +32,7 @@ function getOriginTransform(originRect, modalRect) {
 
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
+    const closeButtonRef = useRef(null)
 
     useLayoutEffect(() => {
         if (!book || !modalRef.current) {
@@ -63,20 +76,77 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
             return undefined
         }
 
+        const modalElement = modalRef.current
+
+        if (!modalElement) {
+            return undefined
+        }
+
+        const focusFrame = window.requestAnimationFrame(() => {
+            if (closeButtonRef.current) {
+                closeButtonRef.current.focus()
+                return
+            }
+
+            const focusableElements = getFocusableElements(modalElement)
+
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus()
+                return
+            }
+
+            modalElement.focus()
+        })
+
         function handleEscape(event) {
             if (event.key === 'Escape') {
+                event.preventDefault()
+                event.stopPropagation()
                 onClose()
+                return
+            }
+
+            if (event.key !== 'Tab') {
+                return
+            }
+
+            const focusableElements = getFocusableElements(modalElement)
+
+            if (focusableElements.length === 0) {
+                event.preventDefault()
+                modalElement.focus()
+                return
+            }
+
+            const firstElement = focusableElements[0]
+            const lastElement = focusableElements[focusableElements.length - 1]
+            const activeElement = document.activeElement
+            const isActiveInsideModal = modalElement.contains(activeElement)
+
+            if (event.shiftKey) {
+                if (!isActiveInsideModal || activeElement === firstElement) {
+                    event.preventDefault()
+                    lastElement.focus()
+                }
+
+                return
+            }
+
+            if (!isActiveInsideModal || activeElement === lastElement) {
+                event.preventDefault()
+                firstElement.focus()
             }
         }
 
         const previousOverflow = document.body.style.overflow
         document.body.style.overflow = 'hidden'
 
-        window.addEventListener('keydown', handleEscape)
+        document.addEventListener('keydown', handleEscape, true)
 
         return () => {
+            window.cancelAnimationFrame(focusFrame)
             document.body.style.overflow = previousOverflow
-            window.removeEventListener('keydown', handleEscape)
+            document.removeEventListener('keydown', handleEscape, true)
         }
     }, [book, onClose])
 
@@ -104,9 +174,11 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="book-modal-title"
+                tabIndex={-1}
             >
                 <div className="book-modal-content">
                     <button
+                        ref={closeButtonRef}
                         type="button"
                         className="book-modal-close"
                         onClick={onClose}

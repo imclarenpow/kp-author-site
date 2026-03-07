@@ -12,6 +12,7 @@ function HomePage() {
     const [modalOriginRect, setModalOriginRect] = useState(null)
     const [isModalClosing, setIsModalClosing] = useState(false)
     const closeTimeoutRef = useRef(null)
+    const modalTriggerRef = useRef(null)
 
     useEffect(() => {
         let isMounted = true
@@ -59,6 +60,8 @@ function HomePage() {
             closeTimeoutRef.current = null
         }
 
+        modalTriggerRef.current = sourceElement ?? null
+
         const rect = sourceElement?.getBoundingClientRect()
 
         setModalOriginRect(
@@ -86,6 +89,14 @@ function HomePage() {
             setSelectedBook(null)
             setModalOriginRect(null)
             setIsModalClosing(false)
+
+            if (modalTriggerRef.current && document.contains(modalTriggerRef.current)) {
+                window.requestAnimationFrame(() => {
+                    modalTriggerRef.current.focus()
+                })
+            }
+
+            modalTriggerRef.current = null
             closeTimeoutRef.current = null
         }, BOOK_MODAL_ANIMATION_MS)
     }
