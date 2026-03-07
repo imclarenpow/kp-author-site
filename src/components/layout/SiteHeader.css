@@ -1,0 +1,60 @@
+.site-header {
+  background-color: var(--color-forest);
+  color: var(--color-ice);
+  min-width: 270px;
+  padding-top: 0.5rem;
+}
+
+.site-header-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  cursor: default;
+}
+
+.site-header-logo {
+  margin: 0 auto;
+  display: block;
+  max-width: 150px;
+}
+
+.site-navbar {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  place-items: center;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  padding-bottom: 10px;
+  gap: 0.25rem;
+}
+
+.pages,
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social {
+  gap: 0.25rem;
+}
+
+@media (max-width: 700px) {
+  .site-navbar {
+    grid-template-columns: 1fr;
+    row-gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .site-navbar-spacer {
+    display: none;
+  }
+
+  .nav-links {
+    padding-bottom: 0;
+  }
+}

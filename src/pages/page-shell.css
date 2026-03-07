@@ -1,0 +1,24 @@
+.page-stack > * + * {
+  margin-top: 0.75rem;
+}
+
+.page-title {
+  margin: 0;
+  color: var(--color-forest);
+}
+
+.page-lead {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.page-link-inline {
+  color: #1b5e89;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.page-link-inline:hover,
+.page-link-inline:focus-visible {
+  border-bottom-color: currentColor;
+}

@@ -1,0 +1,37 @@
+.header-link {
+  color: #eef6fc;
+  text-decoration: none;
+  padding: 10px;
+  border-bottom: 2px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, border-bottom-color 0.3s ease, color 0.3s ease;
+}
+
+.header-link:hover,
+.header-link:focus-visible {
+  background-color: #28293e;
+  border-bottom-color: #b8c5d6;
+  color: #b8c5d6;
+}
+
+.header-link-active {
+  border-bottom-color: #b8c5d6;
+}
+
+.page-link {
+  font-weight: 500;
+}
+
+.social-link {
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.social-link .svg-inline--fa {
+  width: 1rem;
+  height: 1rem;
+}
