@@ -88,3 +88,23 @@ Further Development
 - Changed around how the search bar appears
 - Cleaned up CSS somewhat
 - still cracking
+
+### 7th March 2026
+
+React app migration and tidy-up.
+
+#### Progress Made
+
+- Refactored the React app into a reusable structure using layouts, pages, and shared components.
+- Added route-based navigation (`/`, `/about`, `/news`) and a not-found page.
+- Moved site metadata/navigation/social links into a shared config file.
+- Switched social icons to proper React Font Awesome imports for Facebook and Instagram.
+- Fixed Vite asset resolution for the header logo using the public asset path.
+- Ported the About page content and styles from the static version.
+- Ported the News page newsletter form and styles from the static version.
+- Built the Home page using `public/assets/docs/books.json` as the data source.
+- Added reusable books components (`BookGrid`, `BookCard`) and tiled layout matching the static site.
+- Updated Home page UI by removing the top books label and search bar.
+- Removed the Show More/Show Less behavior; book cards now show a short truncated blurb preview, with the full blurb displayed in the book details modal.
+- Added subtle border-radius styling to book cards/images.
+- Removed unused code (`BookSearchBar` component) and validated with lint/build.

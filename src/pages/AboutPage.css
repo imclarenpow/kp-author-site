@@ -1,0 +1,54 @@
+#about-content {
+  min-width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#about-headshot {
+  max-width: 40%;
+  min-width: 200px;
+  max-height: 74.2vh;
+  padding: 10px;
+  object-fit: cover;
+}
+
+#about-text {
+  max-width: 40%;
+  min-width: 200px;
+  padding: 10px;
+}
+
+#article-links {
+  margin: 0 20px;
+  padding: 0;
+}
+
+#article-links li + li {
+  margin-top: 0.5rem;
+}
+
+.link {
+  color: #355834;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: #14281d;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  #about-headshot,
+  #about-text {
+    max-width: 100%;
+  }
+}

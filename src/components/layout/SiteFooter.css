@@ -1,0 +1,21 @@
+.site-footer {
+  background-color: var(--color-forest);
+  color: var(--color-ice);
+  text-align: center;
+  padding: 1rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--color-ice-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  border-bottom-color: currentColor;
+}
