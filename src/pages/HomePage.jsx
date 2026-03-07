@@ -75,8 +75,13 @@ function HomePage() {
         setSelectedBook(book)
     }
 
+    const selectedBookRef = useRef(null)
+    const isModalClosingRef = useRef(false)
+    selectedBookRef.current = selectedBook
+    isModalClosingRef.current = isModalClosing
+
     const handleModalClose = useCallback(() => {
-        if (!selectedBook || isModalClosing) {
+        if (!selectedBookRef.current || isModalClosingRef.current) {
             return
         }
 
@@ -88,7 +93,7 @@ function HomePage() {
             setIsModalClosing(false)
             closeTimeoutRef.current = null
         }, BOOK_MODAL_ANIMATION_MS)
-    }, [selectedBook, isModalClosing])
+    }, [])
 
     return (
         <section className="page-container home-page-container">
