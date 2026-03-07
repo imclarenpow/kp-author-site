@@ -1,10 +1,17 @@
-import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import {
+    faFacebook,
+    faGithub,
+    faInstagram,
+    faLinkedinIn,
+} from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './header-links.css'
 
 const socialIconsByName = {
     facebook: faFacebook,
+    github: faGithub,
     instagram: faInstagram,
+    linkedin: faLinkedinIn,
 }
 
 function SocialLinkItem({ href, iconName, label }) {

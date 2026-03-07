@@ -31,3 +31,16 @@ export const socialLinks = [
         label: 'Keryn Powell Instagram',
     },
 ]
+
+export const footerSocialLinks = [
+    {
+        href: 'https://github.com/imclarenpow',
+        iconName: 'github',
+        label: 'Isaac Powell GitHub',
+    },
+    {
+        href: siteMeta.footerCreditUrl,
+        iconName: 'linkedin',
+        label: 'Isaac Powell LinkedIn',
+    },
+]
