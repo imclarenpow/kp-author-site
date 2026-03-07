@@ -1,0 +1,132 @@
+.book-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 1rem;
+  background: rgba(20, 40, 29, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-modal {
+  width: min(920px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 2px solid #b8c5d6;
+  border-radius: 14px;
+  box-shadow: 0 16px 46px rgba(14, 28, 20, 0.26);
+  padding: 1rem 1rem 1.25rem;
+}
+
+.book-modal-close {
+  position: absolute;
+  top: -0.7rem;
+  right: 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0px transparent #ffffff;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #14281d;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+}
+.book-modal-close:hover,
+.book-modal-close:focus-visible {
+  border: 1px solid #b8c5d6;
+  background-color: var(--color-forest);
+  border-color: #9fb4ca;
+  color: #b8c5d6;
+}
+
+.book-modal-content {
+  position: relative;
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: minmax(230px, 320px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.book-modal-details {
+  padding-top: 0.2rem;
+}
+
+.book-modal-title {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.book-modal-subtitle {
+  margin: 0.2rem 0 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.book-modal-meta {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.book-modal-meta + .book-modal-meta {
+  margin-top: 0.25rem;
+}
+
+.book-modal-blurb {
+  margin: 0.75rem 0 0;
+  line-height: 1.55;
+}
+
+.book-modal-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.book-modal-link {
+  text-decoration: none;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.book-modal-link-primary {
+  background: #355834;
+  color: #eef6fc;
+}
+
+.book-modal-link-primary:hover,
+.book-modal-link-primary:focus-visible {
+  background-color: #28293e;
+  color: #b8c5d6;
+}
+
+.book-modal-link-secondary {
+  color: #355834;
+  border: 1px solid #b8c5d6;
+}
+
+.book-modal-link-secondary:hover,
+.book-modal-link-secondary:focus-visible {
+  color: #14281d;
+  border-color: #9fb4ca;
+}
+
+@media (max-width: 760px) {
+  .book-modal-content {
+    grid-template-columns: 1fr;
+  }
+
+  .book-modal-cover {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}

@@ -42,17 +42,26 @@
   box-shadow: 0 6px 14px rgba(20, 40, 29, 0.1);
 }
 
+.book-interactive {
+  cursor: pointer;
+}
+
+.book-interactive:focus-visible {
+  outline: 3px solid #9fb4ca;
+  outline-offset: 3px;
+}
+
 .book > :not(img) {
   width: 100%;
 }
 
-.book > img {
-  width: 100%;
+.book-cover {
   max-width: 100%;
-  height: 340px;
-  max-height: 340px;
-  object-fit: contain;
-  border-radius: 6px;
+  height: 400px;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .title {

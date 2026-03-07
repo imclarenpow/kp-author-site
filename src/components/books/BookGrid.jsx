@@ -1,10 +1,10 @@
 import BookCard from './BookCard'
 
-function BookGrid({ books }) {
+function BookGrid({ books, onBookSelect }) {
     return (
         <div id="library">
             {books.map((book) => (
-                <BookCard key={`${book.title}-${book.series}`} book={book} />
+                <BookCard key={`${book.title}-${book.series}`} book={book} onSelect={onBookSelect} />
             ))}
         </div>
     )

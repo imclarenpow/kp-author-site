@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import BookDetailsModal from '../components/books/BookDetailsModal'
 import BookGrid from '../components/books/BookGrid'
 import './HomePage.css'
 
 function HomePage() {
     const [books, setBooks] = useState([])
     const [errorMessage, setErrorMessage] = useState('')
+    const [selectedBook, setSelectedBook] = useState(null)
 
     useEffect(() => {
         let isMounted = true
@@ -42,7 +44,9 @@ function HomePage() {
         <section className="page-container home-page-container">
             {errorMessage ? <p className="home-page-status">{errorMessage}</p> : null}
 
-            <BookGrid books={books} />
+            <BookGrid books={books} onBookSelect={setSelectedBook} />
+
+            <BookDetailsModal book={selectedBook} onClose={() => setSelectedBook(null)} />
         </section>
     )
 }

@@ -1,0 +1,8 @@
+.book-cover,
+.book-modal-cover {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #dce5ef;
+  background: #f8fbff;
+  object-fit: contain;
+}
