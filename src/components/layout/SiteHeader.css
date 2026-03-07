@@ -5,18 +5,82 @@
   padding-top: 0.5rem;
 }
 
+.site-header-brand {
+  --header-stripe-gradient: linear-gradient(
+    135deg,
+    transparent 0 41%,
+    var(--color-forest-soft) 45% 58%,
+    transparent 62% 100%
+  );
+  --header-stripe-size: 250% 250%;
+  --header-stripe-start: -30% -30%;
+  --header-stripe-end: 100% 100%;
+  --header-stripe-duration: 1s;
+  --header-stripe-easing: cubic-bezier(0.2, 0.9, 0.25, 1);
+
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.site-header-logo-wrap {
+  position: relative;
+  margin: 0 auto;
+  width: min(150px, 40vw);
+}
+
 .site-header-title {
+  position: relative;
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
   padding: 0.2rem 0;
+  color: var(--color-ice);
   text-align: center;
   cursor: default;
 }
 
+.site-header-title::after {
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background-image: var(--header-stripe-gradient);
+  background-size: var(--header-stripe-size);
+  background-position: var(--header-stripe-start);
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+  will-change: background-position;
+}
+
 .site-header-logo {
-  margin: 0 auto;
   display: block;
-  max-width: 150px;
+  width: 100%;
+}
+
+.site-header-logo-tint {
+  position: absolute;
+  inset: 0;
+  background-image: var(--header-stripe-gradient);
+  background-size: var(--header-stripe-size);
+  background-position: var(--header-stripe-start);
+  background-repeat: no-repeat;
+  -webkit-mask-image: var(--site-logo-mask);
+  mask-image: var(--site-logo-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  pointer-events: none;
+  will-change: background-position;
+}
+
+.site-header-brand:hover .site-header-title::after,
+.site-header-brand:hover .site-header-logo-tint {
+  animation: header-diagonal-stripe-pass var(--header-stripe-duration) var(--header-stripe-easing);
 }
 
 .site-navbar {
@@ -42,6 +106,23 @@
 
 .social {
   gap: 0.25rem;
+}
+
+@keyframes header-diagonal-stripe-pass {
+  0% {
+    background-position: var(--header-stripe-start);
+  }
+
+  100% {
+    background-position: var(--header-stripe-end);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header-brand:hover .site-header-title::after,
+  .site-header-brand:hover .site-header-logo-tint {
+    animation: none;
+  }
 }
 
 @media (max-width: 700px) {
