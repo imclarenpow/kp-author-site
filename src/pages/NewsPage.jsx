@@ -76,7 +76,7 @@ function NewsPage() {
 
                                     <p style={{ margin: '0px auto' }}>
                                         <a
-                                            href="http://eepurl.com/i6SKOw"
+                                            href="https://eepurl.com/i6SKOw"
                                             title="Mailchimp - email marketing made easy and fun"
                                         >
                                             <span

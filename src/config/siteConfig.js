@@ -26,7 +26,7 @@ export const socialLinks = [
         label: 'Keryn Powell Facebook',
     },
     {
-        href: 'http://www.instagram.com/kerynpowellauthor/',
+        href: 'https://www.instagram.com/kerynpowellauthor/',
         iconName: 'instagram',
         label: 'Keryn Powell Instagram',
     },

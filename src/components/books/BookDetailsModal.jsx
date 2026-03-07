@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
@@ -18,8 +18,19 @@ function getOriginTransform(originRect, modalRect) {
     }
 }
 
+function renderBlurb(html = '') {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    doc.querySelectorAll('br').forEach((br) => br.replaceWith('\n'))
+    return (doc.body.textContent || '')
+        .split('\n')
+        .map((part) => part.trim())
+        .filter(Boolean)
+}
+
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
+    const blurbLines = useMemo(() => renderBlurb(book?.blurb), [book?.blurb])
 
     useLayoutEffect(() => {
         if (!book || !modalRef.current) {
@@ -132,10 +143,19 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         </p>
 
                         {hasBlurb ? (
-                            <p
-                                className="book-modal-blurb"
-                                dangerouslySetInnerHTML={{ __html: book.blurb }}
-                            ></p>
+                            <div className="book-modal-blurb">
+                                {blurbLines.map((line, i) => (
+                                    <p
+                                        key={i}
+                                        style={{
+                                            margin: 0,
+                                            ...(i > 0 ? { marginTop: '0.5em' } : null),
+                                        }}
+                                    >
+                                        {line}
+                                    </p>
+                                ))}
+                            </div>
                         ) : null}
 
                         {hasPrimaryLink || hasSecondaryLink ? (

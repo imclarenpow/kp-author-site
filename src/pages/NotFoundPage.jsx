@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import './page-shell.css'
 
 function NotFoundPage() {
     return (
