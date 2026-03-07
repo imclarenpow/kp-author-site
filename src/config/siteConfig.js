@@ -2,6 +2,10 @@ export const siteMeta = {
     siteTitle: 'Keryn Powell',
     logoSrc: '/assets/img/logo/white-sml.png',
     logoAlt: 'Frog Logo for Keryn Powell',
+    siteUrl: 'https://kerynpowellauthor.com',
+    defaultDescription:
+        'Keryn Powell writes fiction for young and not so young adults. Explore books, author background, and newsletter updates.',
+    defaultShareImage: '/assets/img/logo/white-med.png',
     footerCreditName: 'Isaac Powell',
     footerCreditUrl:
         'https://www.linkedin.com/in/isaac-powell-717a33268/?originalSubdomain=nz',
@@ -17,6 +21,13 @@ export const pageTitles = {
     '/': 'Keryn Powell | Books',
     '/about': 'Keryn Powell | About',
     '/news': 'Keryn Powell | News',
+}
+
+export const pageDescriptions = {
+    '/': 'Browse Keryn Powell\'s books, including current releases and upcoming titles.',
+    '/about':
+        'Learn about Keryn Powell, her writing background, and links to interviews and reviews.',
+    '/news': 'Sign up to Keryn Powell\'s newsletter for updates on books, releases, and news.',
 }
 
 export const socialLinks = [
