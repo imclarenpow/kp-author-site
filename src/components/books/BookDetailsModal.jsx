@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
@@ -30,6 +30,7 @@ function renderBlurb(html = '') {
 
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
+    const blurbLines = useMemo(() => renderBlurb(book?.blurb), [book?.blurb])
 
     useLayoutEffect(() => {
         if (!book || !modalRef.current) {
@@ -143,7 +144,7 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
 
                         {hasBlurb ? (
                             <div className="book-modal-blurb">
-                                {renderBlurb(book.blurb).map((line, i) => (
+                                {blurbLines.map((line, i) => (
                                     <p
                                         key={i}
                                         style={{

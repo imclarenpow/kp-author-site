@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import SiteFooter from '../components/layout/SiteFooter'
 import SiteHeader from '../components/layout/SiteHeader'
 import { pageTitles } from '../config/siteConfig'
+import '../pages/page-shell.css'
 import './SiteLayout.css'
 
 function SiteLayout() {
