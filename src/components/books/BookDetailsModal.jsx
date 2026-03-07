@@ -18,6 +18,16 @@ function getOriginTransform(originRect, modalRect) {
     }
 }
 
+function renderBlurb(html = '') {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    doc.querySelectorAll('br').forEach((br) => br.replaceWith('\n'))
+    return (doc.body.textContent || '')
+        .split('\n')
+        .map((part) => part.trim())
+        .filter(Boolean)
+}
+
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
 
@@ -132,10 +142,11 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         </p>
 
                         {hasBlurb ? (
-                            <p
-                                className="book-modal-blurb"
-                                dangerouslySetInnerHTML={{ __html: book.blurb }}
-                            ></p>
+                            <div className="book-modal-blurb">
+                                {renderBlurb(book.blurb).map((line, i) => (
+                                    <p key={i}>{line}</p>
+                                ))}
+                            </div>
                         ) : null}
 
                         {hasPrimaryLink || hasSecondaryLink ? (

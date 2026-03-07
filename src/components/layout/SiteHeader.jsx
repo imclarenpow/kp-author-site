@@ -20,7 +20,7 @@ function SiteHeader() {
                     ))}
                 </nav>
 
-                <div className="social nav-links" aria-label="Social links">
+                <nav className="social nav-links" aria-label="Social">
                     {socialLinks.map((link) => (
                         <SocialLinkItem
                             key={link.href}
@@ -29,7 +29,7 @@ function SiteHeader() {
                             label={link.label}
                         />
                     ))}
-                </div>
+                </nav>
             </div>
         </header>
     )

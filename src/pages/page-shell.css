@@ -1,3 +1,11 @@
+.page-container {
+  min-width: 250px;
+  display: grid;
+  margin: auto;
+  place-items: center;
+  padding: 10px;
+}
+
 .page-stack > * + * {
   margin-top: 0.75rem;
 }
