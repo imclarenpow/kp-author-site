@@ -15,13 +15,12 @@ function truncateText(value = '', maxLength = 60) {
 function BookCard({ book, onSelect }) {
     const blurbText = truncateText(stripHtmlTags(book.blurb), 60)
     const hasBlurb = Boolean(blurbText)
-    const hasPrimaryLink = Boolean(book.link1 && book.link1name)
     const coverSrc = `/assets/img/covers/${book.cover}`
     const isInteractive = typeof onSelect === 'function'
 
-    function handleSelect() {
+    function handleSelect(event) {
         if (isInteractive) {
-            onSelect(book)
+            onSelect(book, event.currentTarget)
         }
     }
 
@@ -32,7 +31,7 @@ function BookCard({ book, onSelect }) {
 
         if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault()
-            onSelect(book)
+            onSelect(book, event.currentTarget)
         }
     }
 

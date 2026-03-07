@@ -1,8 +1,63 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
-function BookDetailsModal({ book, onClose }) {
+const MIN_SCALE_FACTOR = 0.2
+
+function getOriginTransform(originRect, modalRect) {
+    const originCenterX = originRect.left + originRect.width / 2
+    const originCenterY = originRect.top + originRect.height / 2
+    const modalCenterX = modalRect.left + modalRect.width / 2
+    const modalCenterY = modalRect.top + modalRect.height / 2
+
+    return {
+        x: originCenterX - modalCenterX,
+        y: originCenterY - modalCenterY,
+        scaleX: Math.max(MIN_SCALE_FACTOR, originRect.width / modalRect.width),
+        scaleY: Math.max(MIN_SCALE_FACTOR, originRect.height / modalRect.height),
+    }
+}
+
+function BookDetailsModal({ book, originRect, isClosing, onClose }) {
+    const modalRef = useRef(null)
+
+    useLayoutEffect(() => {
+        if (!book || !modalRef.current) {
+            return
+        }
+
+        const modalElement = modalRef.current
+
+        if (!originRect) {
+            modalElement.style.transform = 'translate(0px, 0px) scale(1, 1)'
+            modalElement.style.opacity = '1'
+            return
+        }
+
+        const modalRect = modalElement.getBoundingClientRect()
+        const { x, y, scaleX, scaleY } = getOriginTransform(originRect, modalRect)
+        const collapsedTransform = `translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY})`
+
+        if (isClosing) {
+            modalElement.style.transform = collapsedTransform
+            modalElement.style.opacity = '0.35'
+            return
+        }
+
+        modalElement.style.transition = 'none'
+        modalElement.style.transform = collapsedTransform
+        modalElement.style.opacity = '0.35'
+        const frame = window.requestAnimationFrame(() => {
+            modalElement.style.transition = ''
+            modalElement.style.transform = 'translate(0px, 0px) scale(1, 1)'
+            modalElement.style.opacity = '1'
+        })
+
+        return () => {
+            window.cancelAnimationFrame(frame)
+        }
+    }, [book, originRect, isClosing])
+
     useEffect(() => {
         if (!book) {
             return undefined
@@ -28,6 +83,7 @@ function BookDetailsModal({ book, onClose }) {
     if (!book) {
         return null
     }
+    const backdropClassName = `book-modal-backdrop${isClosing ? ' book-modal-backdrop-closing' : ''}`
 
     const coverSrc = `/assets/img/covers/${book.cover}`
     const hasPrimaryLink = Boolean(book.link1 && book.link1name)
@@ -41,8 +97,9 @@ function BookDetailsModal({ book, onClose }) {
     }
 
     return (
-        <div className="book-modal-backdrop" onClick={handleBackdropClick} role="presentation">
+        <div className={backdropClassName} onClick={handleBackdropClick} role="presentation">
             <div
+                ref={modalRef}
                 className="book-modal"
                 role="dialog"
                 aria-modal="true"

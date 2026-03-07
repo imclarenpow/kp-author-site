@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BookDetailsModal from '../components/books/BookDetailsModal'
 import BookGrid from '../components/books/BookGrid'
 import './HomePage.css'
+
+const BOOK_MODAL_ANIMATION_MS = 280
 
 function HomePage() {
     const [books, setBooks] = useState([])
     const [errorMessage, setErrorMessage] = useState('')
     const [selectedBook, setSelectedBook] = useState(null)
+    const [modalOriginRect, setModalOriginRect] = useState(null)
+    const [isModalClosing, setIsModalClosing] = useState(false)
+    const closeTimeoutRef = useRef(null)
 
     useEffect(() => {
         let isMounted = true
@@ -40,13 +45,63 @@ function HomePage() {
         }
     }, [])
 
+    useEffect(() => {
+        return () => {
+            if (closeTimeoutRef.current) {
+                window.clearTimeout(closeTimeoutRef.current)
+            }
+        }
+    }, [])
+
+    function handleBookSelect(book, sourceElement) {
+        if (closeTimeoutRef.current) {
+            window.clearTimeout(closeTimeoutRef.current)
+            closeTimeoutRef.current = null
+        }
+
+        const rect = sourceElement?.getBoundingClientRect()
+
+        setModalOriginRect(
+            rect
+                ? {
+                    top: rect.top,
+                    left: rect.left,
+                    width: rect.width,
+                    height: rect.height,
+                }
+                : null,
+        )
+        setIsModalClosing(false)
+        setSelectedBook(book)
+    }
+
+    function handleModalClose() {
+        if (!selectedBook || isModalClosing) {
+            return
+        }
+
+        setIsModalClosing(true)
+
+        closeTimeoutRef.current = window.setTimeout(() => {
+            setSelectedBook(null)
+            setModalOriginRect(null)
+            setIsModalClosing(false)
+            closeTimeoutRef.current = null
+        }, BOOK_MODAL_ANIMATION_MS)
+    }
+
     return (
         <section className="page-container home-page-container">
             {errorMessage ? <p className="home-page-status">{errorMessage}</p> : null}
 
-            <BookGrid books={books} onBookSelect={setSelectedBook} />
+            <BookGrid books={books} onBookSelect={handleBookSelect} />
 
-            <BookDetailsModal book={selectedBook} onClose={() => setSelectedBook(null)} />
+            <BookDetailsModal
+                book={selectedBook}
+                originRect={modalOriginRect}
+                isClosing={isModalClosing}
+                onClose={handleModalClose}
+            />
         </section>
     )
 }
