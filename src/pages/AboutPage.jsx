@@ -1,9 +1,32 @@
 import './AboutPage.css'
 
+const primaryHeadshotSrc = '/assets/BTRrev.jpg'
+const fallbackHeadshotSrc = '/assets/img/covers/temp.png'
+
+function handleHeadshotError(event) {
+    const image = event.currentTarget
+
+    if (!image.dataset.retry) {
+        image.dataset.retry = 'true'
+        image.src = `${primaryHeadshotSrc}?retry=${Date.now()}`
+        return
+    }
+
+    image.onerror = null
+    image.src = fallbackHeadshotSrc
+}
+
 function AboutPage() {
     return (
         <section className="page-container" id="about-content">
-            <img id="about-headshot" src="/assets/BTRrev.jpg" alt="Photo of Keryn" />
+            <img
+                id="about-headshot"
+                src={primaryHeadshotSrc}
+                alt="Photo of Keryn"
+                loading="eager"
+                decoding="async"
+                onError={handleHeadshotError}
+            />
             <div id="about-text">
                 <h2>About Keryn</h2>
                 <p>
