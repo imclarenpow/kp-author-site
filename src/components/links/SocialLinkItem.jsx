@@ -5,6 +5,7 @@ import {
     faLinkedinIn,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ExternalLink from './ExternalLink'
 import './header-links.css'
 
 const socialIconsByName = {
@@ -18,15 +19,13 @@ function SocialLinkItem({ href, iconName, label }) {
     const icon = socialIconsByName[iconName]
 
     return (
-        <a
+        <ExternalLink
             href={href}
-            target="_blank"
-            rel="noopener noreferrer"
             className="social-link header-link"
             aria-label={label}
         >
             {icon ? <FontAwesomeIcon icon={icon} /> : null}
-        </a>
+        </ExternalLink>
     )
 }
 

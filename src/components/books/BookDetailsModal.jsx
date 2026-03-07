@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
+import ExternalLink from '../links/ExternalLink'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
@@ -213,23 +214,21 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         {hasPrimaryLink || hasSecondaryLink ? (
                             <div className="book-modal-links">
                                 {hasPrimaryLink ? (
-                                    <a
+                                    <ExternalLink
                                         href={book.link1}
                                         className="book-modal-link book-modal-link-primary"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                     >
                                         {book.link1name}
-                                    </a>
+                                    </ExternalLink>
                                 ) : null}
 
                                 {hasSecondaryLink ? (
-                                    <a
+                                    <ExternalLink
                                         href={book.link2}
                                         className="book-modal-link book-modal-link-secondary"
                                     >
                                         {book.link2name}
-                                    </a>
+                                    </ExternalLink>
                                 ) : null}
                             </div>
                         ) : null}

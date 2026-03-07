@@ -1,16 +1,5 @@
 import './BookCover.css'
-
-function stripHtmlTags(value = '') {
-    return value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
-function truncateText(value = '', maxLength = 60) {
-    if (value.length <= maxLength) {
-        return value
-    }
-
-    return `${value.slice(0, maxLength).trimEnd()}...`
-}
+import { stripHtmlTags, truncateText } from '../../utils/textUtils'
 
 function BookCard({ book, onSelect, isHidden = false }) {
     const blurbText = truncateText(stripHtmlTags(book.blurb), 60)

@@ -1,8 +1,5 @@
 import BookCard from './BookCard'
-
-function getBookKey(book) {
-    return `${book.title}-${book.series}`
-}
+import { getBookKey } from '../../utils/bookUtils'
 
 function BookGrid({ books, onBookSelect, hiddenBookKey }) {
     return (

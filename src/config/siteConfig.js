@@ -55,3 +55,18 @@ export const footerSocialLinks = [
         label: 'Isaac Powell LinkedIn',
     },
 ]
+
+export const aboutReviewLinks = [
+    {
+        href: 'https://www.nzdoctor.co.nz/article/gp-and-novelist-career-stories',
+        label: 'NZ Doctor Article: "GP and novelist: A career of stories"',
+    },
+    {
+        href: 'https://www.nzherald.co.nz/hawkes-bay-today/news/author-explores-different-end-to-legend/JCOW3AH4V4Y373VCWG3EYHFCLA/',
+        label: 'Hawkes Bay Today: "Author Explores different end to legend"',
+    },
+    {
+        href: 'https://www.nzherald.co.nz/hawkes-bay-today/news/book-review-before-the-rising-by-keryn-powell/TOPMGX3OYFJHYTGI3P25KBSWZU/',
+        label: 'Hawkes Bay Today: "Book review: Before the Rising by Keryn Powell"',
+    },
+]
