@@ -144,7 +144,15 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         {hasBlurb ? (
                             <div className="book-modal-blurb">
                                 {renderBlurb(book.blurb).map((line, i) => (
-                                    <p key={i}>{line}</p>
+                                    <p
+                                        key={i}
+                                        style={{
+                                            margin: 0,
+                                            ...(i > 0 ? { marginTop: '0.5em' } : null),
+                                        }}
+                                    >
+                                        {line}
+                                    </p>
                                 ))}
                             </div>
                         ) : null}
