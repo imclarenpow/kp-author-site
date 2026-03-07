@@ -30,6 +30,7 @@ function renderBlurb(html = '') {
 
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
+    const closeButtonRef = useRef(null)
     const blurbLines = useMemo(() => renderBlurb(book?.blurb), [book?.blurb])
 
     useLayoutEffect(() => {
@@ -91,6 +92,19 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
         }
     }, [book, onClose])
 
+    useEffect(() => {
+        if (!book) {
+            return undefined
+        }
+
+        const previouslyFocused = document.activeElement
+        closeButtonRef.current?.focus()
+
+        return () => {
+            previouslyFocused?.focus()
+        }
+    }, [book])
+
     if (!book) {
         return null
     }
@@ -107,6 +121,32 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
         }
     }
 
+    function handleModalKeyDown(event) {
+        if (event.key !== 'Tab') return
+
+        const focusableSelectors =
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        const focusable = Array.from(
+            modalRef.current?.querySelectorAll(focusableSelectors) ?? []
+        )
+        if (focusable.length === 0) return
+
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+
+        if (event.shiftKey) {
+            if (document.activeElement === first) {
+                event.preventDefault()
+                last.focus()
+            }
+        } else {
+            if (document.activeElement === last) {
+                event.preventDefault()
+                first.focus()
+            }
+        }
+    }
+
     return (
         <div className={backdropClassName} onClick={handleBackdropClick} role="presentation">
             <div
@@ -115,9 +155,11 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="book-modal-title"
+                onKeyDown={handleModalKeyDown}
             >
                 <div className="book-modal-content">
                     <button
+                        ref={closeButtonRef}
                         type="button"
                         className="book-modal-close"
                         onClick={onClose}
@@ -146,7 +188,7 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                             <div className="book-modal-blurb">
                                 {blurbLines.map((line, i) => (
                                     <p
-                                        key={i}
+                                        key={line}
                                         style={{
                                             margin: 0,
                                             ...(i > 0 ? { marginTop: '0.5em' } : null),
@@ -175,6 +217,9 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                                     <a
                                         href={book.link2}
                                         className="book-modal-link book-modal-link-secondary"
+                                        {...(/^https?:\/\//i.test(book.link2)
+                                            ? { target: '_blank', rel: 'noopener noreferrer' }
+                                            : {})}
                                     >
                                         {book.link2name}
                                     </a>

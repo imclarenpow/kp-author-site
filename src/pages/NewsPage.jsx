@@ -87,7 +87,7 @@ function NewsPage() {
                                                 }}
                                             >
                                                 <img
-                                                    className="refferal_badge"
+                                                    className="referral_badge"
                                                     src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg"
                                                     alt="Intuit Mailchimp"
                                                     style={{
