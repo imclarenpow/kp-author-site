@@ -39,7 +39,7 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border: 0px transparent #ffffff;
+  border: none;
   border-radius: 999px;
   background: #ffffff;
   color: #14281d;
@@ -97,6 +97,14 @@
 .book-modal-blurb {
   margin: 0.75rem 0 0;
   line-height: 1.55;
+}
+
+.book-modal-blurb p {
+  margin: 0;
+}
+
+.book-modal-blurb p + p {
+  margin-top: 0.5rem;
 }
 
 .book-modal-links {

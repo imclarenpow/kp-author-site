@@ -205,10 +205,11 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         </p>
 
                         {hasBlurb ? (
-                            <p
-                                className="book-modal-blurb"
-                                dangerouslySetInnerHTML={{ __html: book.blurb }}
-                            ></p>
+                            <div className="book-modal-blurb">
+                                {book.blurb.split(/<br\s*\/?>/).map((line, index) => (
+                                    <p key={index}>{line}</p>
+                                ))}
+                            </div>
                         ) : null}
 
                         {hasPrimaryLink || hasSecondaryLink ? (
@@ -223,12 +224,16 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                                 ) : null}
 
                                 {hasSecondaryLink ? (
-                                    <ExternalLink
+                                    <a
                                         href={book.link2}
                                         className="book-modal-link book-modal-link-secondary"
+                                        {...(!book.link2.startsWith('mailto:') && {
+                                            target: '_blank',
+                                            rel: 'noopener noreferrer',
+                                        })}
                                     >
                                         {book.link2name}
-                                    </ExternalLink>
+                                    </a>
                                 ) : null}
                             </div>
                         ) : null}
