@@ -3,7 +3,7 @@
 This app is organized around a `layout + pages + reusable components` pattern so new
 pages can be added without reshuffling existing files.
 
-1. Shared page bits goes in `src/layouts/SiteLayout.jsx`.
+1. Shared page bits go in `src/layouts/SiteLayout.jsx`.
 2. Reusable site parts (header, footer, links) stay in `src/components`.
 3. Route-level pages live in `src/pages`.
 4. Site-wide constants (nav links, social links, metadata) live in `src/config`.

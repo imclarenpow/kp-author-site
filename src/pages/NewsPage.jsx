@@ -76,7 +76,7 @@ function NewsPage() {
 
                                     <p style={{ margin: '0px auto' }}>
                                         <a
-                                            href="http://eepurl.com/i6SKOw"
+                                            href="https://eepurl.com/i6SKOw"
                                             title="Mailchimp - email marketing made easy and fun"
                                         >
                                             <span
@@ -87,7 +87,7 @@ function NewsPage() {
                                                 }}
                                             >
                                                 <img
-                                                    className="refferal_badge"
+                                                    className="referral_badge"
                                                     src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg"
                                                     alt="Intuit Mailchimp"
                                                     style={{

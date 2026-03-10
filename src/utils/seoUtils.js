@@ -1,3 +1,5 @@
+import { siteMeta } from '../config/siteConfig'
+
 export function upsertMetaTag(attribute, key, content) {
     if (!content) {
         return
@@ -31,5 +33,5 @@ export function upsertCanonicalLink(href) {
 }
 
 export function buildAbsoluteUrl(pathname = '') {
-    return `${window.location.origin}${pathname}`
+    return `${siteMeta.siteUrl}${pathname}`
 }

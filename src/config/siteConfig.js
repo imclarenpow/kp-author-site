@@ -2,7 +2,7 @@ export const siteMeta = {
     siteTitle: 'Keryn Powell',
     logoSrc: '/assets/img/logo/white-sml.png',
     logoAlt: 'Frog Logo for Keryn Powell',
-    siteUrl: 'https://kerynpowellauthor.com',
+    siteUrl: 'https://kerynpowellauthor.nz',
     defaultDescription:
         'Keryn Powell writes fiction for young and not so young adults. Explore books, author background, and newsletter updates.',
     defaultShareImage: '/assets/img/logo/white-med.png',
@@ -37,7 +37,7 @@ export const socialLinks = [
         label: 'Keryn Powell Facebook',
     },
     {
-        href: 'http://www.instagram.com/kerynpowellauthor/',
+        href: 'https://www.instagram.com/kerynpowellauthor/',
         iconName: 'instagram',
         label: 'Keryn Powell Instagram',
     },
