@@ -1,8 +1,99 @@
+import { useCallback } from 'react'
+import Card from '../components/common/Card'
+import NewsPostModal from '../components/news/NewsPostModal'
+import useCardModalController from '../hooks/useCardModalController'
+import useNewsPosts from '../hooks/useNewsPosts'
+import useUniformCardHeight from '../hooks/useUniformCardHeight'
 import './NewsPage.css'
 
+function formatPublishedDate(publishedAt) {
+    if (!publishedAt) {
+        return 'Date not set'
+    }
+
+    const parsedDate = new Date(publishedAt)
+
+    if (Number.isNaN(parsedDate.getTime())) {
+        return 'Date not set'
+    }
+
+    return parsedDate.toLocaleDateString('en-NZ', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    })
+}
+
 function NewsPage() {
+    const { posts, isLoading, errorMessage } = useNewsPosts()
+    const getPostKey = useCallback((post) => post?.key || '', [])
+    const {
+        selectedItem: selectedPost,
+        hiddenItemKey: hiddenPostKey,
+        modalOriginRect,
+        isModalClosing,
+        openItemModal: openPostModal,
+        closeItemModal: closePostModal,
+    } = useCardModalController({
+        getItemKey: getPostKey,
+    })
+    const newsFeedListRef = useUniformCardHeight({
+        cardSelector: '.news-post-card',
+        cssVarName: '--news-post-card-height',
+        items: posts,
+        enabled: posts.length > 0,
+    })
+
+    function handlePostClick(post, event, activationElement) {
+        openPostModal(post, activationElement || event.currentTarget)
+    }
+
     return (
         <section className="page-container news-page-container">
+            <section className="news-feed" aria-labelledby="news-feed-title">
+                <h2 id="news-feed-title" className="news-feed-title">
+                    Blog Posts
+                </h2>
+
+                {isLoading ? <p className="news-feed-status">Loading posts...</p> : null}
+                {errorMessage ? <p className="news-feed-status">{errorMessage}</p> : null}
+
+                {!isLoading && !errorMessage && posts.length === 0 ? (
+                    <p className="news-feed-status">No posts found yet.</p>
+                ) : null}
+
+                {posts.length > 0 ? (
+                    <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
+                        {posts.map((post) => (
+                            <li key={post.key} className="news-post-item">
+                                <Card
+                                    className="book news-post-card"
+                                    isInteractive
+                                    isHidden={post.key === hiddenPostKey}
+                                    onActivate={(event, activationElement) =>
+                                        handlePostClick(post, event, activationElement)
+                                    }
+                                    activationLabel={`Open blog post titled ${post.title}`}
+                                >
+                                    <h3 className="title news-post-title">{post.title}</h3>
+
+                                    <p className="book-year news-post-meta">
+                                        <b>Publication Date:</b>{' '}
+                                        {post.publishedAt ? (
+                                            <time dateTime={post.publishedAt}>
+                                                {formatPublishedDate(post.publishedAt)}
+                                            </time>
+                                        ) : (
+                                            'Date not set'
+                                        )}
+                                    </p>
+                                </Card>
+                            </li>
+                        ))}
+                    </ul>
+                ) : null}
+            </section>
+
             <div id="mc_embed_shell">
                 <div id="mc_embed_signup">
                     <form
@@ -108,6 +199,13 @@ function NewsPage() {
                     </form>
                 </div>
             </div>
+
+            <NewsPostModal
+                post={selectedPost}
+                originRect={modalOriginRect}
+                isClosing={isModalClosing}
+                onClose={closePostModal}
+            />
         </section>
     )
 }

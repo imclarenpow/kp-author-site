@@ -108,3 +108,20 @@ React app migration and tidy-up.
 - Removed the Show More/Show Less behavior; book cards now show a truncated blurb preview, with the full blurb available in the book details modal.
 - Added subtle border-radius styling to book cards/images.
 - Removed unused code (`BookSearchBar` component) and validated with lint/build.
+
+### 11th March 2026
+
+Shared component architecture, content source abstraction, and modal/news improvements.
+
+#### Progress Made
+
+- Added reusable shared UI primitives: `Card` and `Modal` components with dedicated styles in `src/components/common/`.
+- Refactored the books flow to use shared primitives (`BookCard`, `BookDetailsModal`) and centralized modal behavior.
+- Added shared hooks for reusable data/UI logic: `useCardModalController`, `useSourceCollection`, and `useUniformCardHeight`.
+- Refactored `useBookModalController` and `useBooksData` to use shared controller/data-loading patterns.
+- Added content source abstraction via `src/config/contentSources.js` and `src/utils/contentSourceClient.js` to support multiple data backends.
+- Added `useNewsPosts` and wired the News page to Sanity-backed post loading.
+- Added `NewsPostModal` (with styling) and updated `NewsPage` to render interactive news cards with modal open/close behavior.
+- Updated card-to-modal trigger behavior so opening animations are driven from full card activation, not only title clicks.
+- Tuned modal open animation math to keep the popup transition visibly clear when card and modal sizes are similar.
+- Added local environment variables in `.env` for Sanity project/dataset/api version configuration.
