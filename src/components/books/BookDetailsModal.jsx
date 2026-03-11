@@ -1,8 +1,21 @@
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import ExternalLink from '../links/ExternalLink'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
 const MIN_SCALE_FACTOR = 0.2
+const FOCUSABLE_SELECTOR =
+    'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+function getFocusableElements(container) {
+    if (!container) {
+        return []
+    }
+
+    return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+        (element) => element.getClientRects().length > 0,
+    )
+}
 
 function getOriginTransform(originRect, modalRect) {
     const originCenterX = originRect.left + originRect.width / 2
@@ -18,20 +31,9 @@ function getOriginTransform(originRect, modalRect) {
     }
 }
 
-function renderBlurb(html = '') {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(html, 'text/html')
-    doc.querySelectorAll('br').forEach((br) => br.replaceWith('\n'))
-    return (doc.body.textContent || '')
-        .split('\n')
-        .map((part) => part.trim())
-        .filter(Boolean)
-}
-
 function BookDetailsModal({ book, originRect, isClosing, onClose }) {
     const modalRef = useRef(null)
     const closeButtonRef = useRef(null)
-    const blurbLines = useMemo(() => renderBlurb(book?.blurb), [book?.blurb])
 
     useLayoutEffect(() => {
         if (!book || !modalRef.current) {
@@ -75,35 +77,79 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
             return undefined
         }
 
+        const modalElement = modalRef.current
+
+        if (!modalElement) {
+            return undefined
+        }
+
+        const focusFrame = window.requestAnimationFrame(() => {
+            if (closeButtonRef.current) {
+                closeButtonRef.current.focus()
+                return
+            }
+
+            const focusableElements = getFocusableElements(modalElement)
+
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus()
+                return
+            }
+
+            modalElement.focus()
+        })
+
         function handleEscape(event) {
             if (event.key === 'Escape') {
+                event.preventDefault()
+                event.stopPropagation()
                 onClose()
+                return
+            }
+
+            if (event.key !== 'Tab') {
+                return
+            }
+
+            const focusableElements = getFocusableElements(modalElement)
+
+            if (focusableElements.length === 0) {
+                event.preventDefault()
+                modalElement.focus()
+                return
+            }
+
+            const firstElement = focusableElements[0]
+            const lastElement = focusableElements[focusableElements.length - 1]
+            const activeElement = document.activeElement
+            const isActiveInsideModal = modalElement.contains(activeElement)
+
+            if (event.shiftKey) {
+                if (!isActiveInsideModal || activeElement === firstElement) {
+                    event.preventDefault()
+                    lastElement.focus()
+                }
+
+                return
+            }
+
+            if (!isActiveInsideModal || activeElement === lastElement) {
+                event.preventDefault()
+                firstElement.focus()
             }
         }
 
         const previousOverflow = document.body.style.overflow
         document.body.style.overflow = 'hidden'
 
-        window.addEventListener('keydown', handleEscape)
+        document.addEventListener('keydown', handleEscape, true)
 
         return () => {
+            window.cancelAnimationFrame(focusFrame)
             document.body.style.overflow = previousOverflow
-            window.removeEventListener('keydown', handleEscape)
+            document.removeEventListener('keydown', handleEscape, true)
         }
     }, [book, onClose])
-
-    useEffect(() => {
-        if (!book) {
-            return undefined
-        }
-
-        const previouslyFocused = document.activeElement
-        closeButtonRef.current?.focus()
-
-        return () => {
-            previouslyFocused?.focus()
-        }
-    }, [book])
 
     if (!book) {
         return null
@@ -121,32 +167,6 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
         }
     }
 
-    function handleModalKeyDown(event) {
-        if (event.key !== 'Tab') return
-
-        const focusableSelectors =
-            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        const focusable = Array.from(
-            modalRef.current?.querySelectorAll(focusableSelectors) ?? []
-        )
-        if (focusable.length === 0) return
-
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
-
-        if (event.shiftKey) {
-            if (document.activeElement === first) {
-                event.preventDefault()
-                last.focus()
-            }
-        } else {
-            if (document.activeElement === last) {
-                event.preventDefault()
-                first.focus()
-            }
-        }
-    }
-
     return (
         <div className={backdropClassName} onClick={handleBackdropClick} role="presentation">
             <div
@@ -155,7 +175,7 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="book-modal-title"
-                onKeyDown={handleModalKeyDown}
+                tabIndex={-1}
             >
                 <div className="book-modal-content">
                     <button
@@ -186,16 +206,8 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
 
                         {hasBlurb ? (
                             <div className="book-modal-blurb">
-                                {blurbLines.map((line, i) => (
-                                    <p
-                                        key={line}
-                                        style={{
-                                            margin: 0,
-                                            ...(i > 0 ? { marginTop: '0.5em' } : null),
-                                        }}
-                                    >
-                                        {line}
-                                    </p>
+                                {book.blurb.split(/<br\s*\/?>/).map((line, index) => (
+                                    <p key={index}>{line}</p>
                                 ))}
                             </div>
                         ) : null}
@@ -203,23 +215,22 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
                         {hasPrimaryLink || hasSecondaryLink ? (
                             <div className="book-modal-links">
                                 {hasPrimaryLink ? (
-                                    <a
+                                    <ExternalLink
                                         href={book.link1}
                                         className="book-modal-link book-modal-link-primary"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
                                     >
                                         {book.link1name}
-                                    </a>
+                                    </ExternalLink>
                                 ) : null}
 
                                 {hasSecondaryLink ? (
                                     <a
                                         href={book.link2}
                                         className="book-modal-link book-modal-link-secondary"
-                                        {...(/^https?:\/\//i.test(book.link2)
-                                            ? { target: '_blank', rel: 'noopener noreferrer' }
-                                            : {})}
+                                        {...(!book.link2.startsWith('mailto:') && {
+                                            target: '_blank',
+                                            rel: 'noopener noreferrer',
+                                        })}
                                     >
                                         {book.link2name}
                                     </a>

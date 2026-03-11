@@ -1,9 +1,5 @@
 .page-container {
-  min-width: 250px;
-  display: grid;
-  margin: auto;
-  place-items: center;
-  padding: 10px;
+  width: 100%;
 }
 
 .page-stack > * + * {

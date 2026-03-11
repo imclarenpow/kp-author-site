@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, opacity 0.18s ease;
 }
 
 .book:hover,
@@ -49,6 +49,15 @@
 .book-interactive:focus-visible {
   outline: 3px solid #9fb4ca;
   outline-offset: 3px;
+}
+
+.book-hidden,
+.book-hidden:hover,
+.book-hidden:focus-within {
+  opacity: 0;
+  transform: none;
+  box-shadow: none;
+  pointer-events: none;
 }
 
 .book > :not(img) {

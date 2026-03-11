@@ -1,17 +1,12 @@
-import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import SiteFooter from '../components/layout/SiteFooter'
 import SiteHeader from '../components/layout/SiteHeader'
-import { pageTitles } from '../config/siteConfig'
-import '../pages/page-shell.css'
+import useSiteMetadata from '../hooks/useSiteMetadata'
 import './SiteLayout.css'
 
 function SiteLayout() {
     const location = useLocation()
-
-    useEffect(() => {
-        document.title = pageTitles[location.pathname] ?? 'Keryn Powell | Author'
-    }, [location.pathname])
+    useSiteMetadata(location.pathname)
 
     return (
         <div className="site-shell">

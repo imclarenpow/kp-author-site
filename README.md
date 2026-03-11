@@ -105,6 +105,6 @@ React app migration and tidy-up.
 - Built the Home page using `public/assets/docs/books.json` as the data source.
 - Added reusable books components (`BookGrid`, `BookCard`) and tiled layout matching the static site.
 - Updated Home page UI by removing the top books label and search bar.
-- Removed the Show More/Show Less behavior; book cards now show a short truncated blurb preview, with the full blurb displayed in the book details modal.
+- Removed the Show More/Show Less behavior; book cards now show a truncated blurb preview, with the full blurb available in the book details modal.
 - Added subtle border-radius styling to book cards/images.
 - Removed unused code (`BookSearchBar` component) and validated with lint/build.

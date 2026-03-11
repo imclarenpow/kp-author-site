@@ -1,9 +1,24 @@
 import './AboutPage.css'
+import ExternalLink from '../components/links/ExternalLink'
+import { aboutReviewLinks } from '../config/siteConfig'
+import useImageFallback from '../hooks/useImageFallback'
+
+const primaryHeadshotSrc = '/assets/BTRrev.jpg'
+const fallbackHeadshotSrc = '/assets/img/covers/temp.png'
 
 function AboutPage() {
+    const { onError: handleHeadshotError } = useImageFallback(primaryHeadshotSrc, fallbackHeadshotSrc)
+
     return (
         <section className="page-container" id="about-content">
-            <img id="about-headshot" src="/assets/BTRrev.jpg" alt="Photo of Keryn" />
+            <img
+                id="about-headshot"
+                src={primaryHeadshotSrc}
+                alt="Photo of Keryn"
+                loading="eager"
+                decoding="async"
+                onError={handleHeadshotError}
+            />
             <div id="about-text">
                 <h2>About Keryn</h2>
                 <p>
@@ -15,36 +30,16 @@ function AboutPage() {
 
                 <h3>Links to Reviews and Interviews</h3>
                 <ul id="article-links">
-                    <li>
-                        <a
-                            className="link"
-                            href="https://www.nzdoctor.co.nz/article/gp-and-novelist-career-stories"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            NZ Doctor Article: "GP and novelist: A career of stories"
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            className="link"
-                            href="https://www.nzherald.co.nz/hawkes-bay-today/news/author-explores-different-end-to-legend/JCOW3AH4V4Y373VCWG3EYHFCLA/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Hawkes Bay Today: "Author Explores different end to legend"
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            className="link"
-                            href="https://www.nzherald.co.nz/hawkes-bay-today/news/book-review-before-the-rising-by-keryn-powell/TOPMGX3OYFJHYTGI3P25KBSWZU/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Hawkes Bay Today: "Book review: Before the Rising by Keryn Powell"
-                        </a>
-                    </li>
+                    {aboutReviewLinks.map((article) => (
+                        <li key={article.href}>
+                            <ExternalLink
+                                className="link"
+                                href={article.href}
+                            >
+                                {article.label}
+                            </ExternalLink>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </section>

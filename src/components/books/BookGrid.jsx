@@ -1,11 +1,21 @@
 import BookCard from './BookCard'
+import { getBookKey } from '../../utils/bookUtils'
 
-function BookGrid({ books, onBookSelect }) {
+function BookGrid({ books, onBookSelect, hiddenBookKey }) {
     return (
         <div id="library">
-            {books.map((book) => (
-                <BookCard key={`${book.title}-${book.series}`} book={book} onSelect={onBookSelect} />
-            ))}
+            {books.map((book) => {
+                const bookKey = getBookKey(book)
+
+                return (
+                    <BookCard
+                        key={bookKey}
+                        book={book}
+                        onSelect={onBookSelect}
+                        isHidden={bookKey === hiddenBookKey}
+                    />
+                )
+            })}
         </div>
     )
 }

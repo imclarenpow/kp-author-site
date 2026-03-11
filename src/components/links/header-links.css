@@ -18,6 +18,11 @@
   color: #b8c5d6;
 }
 
+.header-link:focus-visible {
+  outline: 3px solid #9fb4ca;
+  outline-offset: 2px;
+}
+
 .header-link-active {
   border-bottom-color: #b8c5d6;
 }

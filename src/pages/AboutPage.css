@@ -17,7 +17,9 @@
   max-width: 40%;
   min-width: 200px;
   max-height: 74.2vh;
-  padding: 10px;
+  display: block;
+  border: 2px solid #b8c5d6;
+  border-radius: 10px;
   object-fit: cover;
 }
 
