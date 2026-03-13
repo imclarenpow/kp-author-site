@@ -1,8 +1,15 @@
 import Modal from '../common/Modal'
 import './NewsPostModal.css'
 
-const SANITY_PROJECT_ID = import.meta.env.VITE_SANITY_PROJECT_ID || ''
-const SANITY_DATASET = import.meta.env.VITE_SANITY_DATASET || ''
+const sanityImageConfig = {
+    projectId: '',
+    dataset: '',
+}
+
+export function configureNewsPostModalSanity({ projectId, dataset }) {
+    sanityImageConfig.projectId = projectId || ''
+    sanityImageConfig.dataset = dataset || ''
+}
 
 function formatPublishedDate(publishedAt) {
     if (!publishedAt) {
@@ -38,7 +45,15 @@ function getSanityImagePathFromRef(assetRef) {
 }
 
 function getSanityImageUrl(assetRef) {
-    if (!SANITY_PROJECT_ID || !SANITY_DATASET) {
+    if (!sanityImageConfig.projectId || !sanityImageConfig.dataset) {
+        const envProjectId = import.meta.env.VITE_SANITY_PROJECT_ID || ''
+        const envDataset = import.meta.env.VITE_SANITY_DATASET || ''
+
+        sanityImageConfig.projectId = sanityImageConfig.projectId || envProjectId
+        sanityImageConfig.dataset = sanityImageConfig.dataset || envDataset
+    }
+
+    if (!sanityImageConfig.projectId || !sanityImageConfig.dataset) {
         return ''
     }
 
@@ -48,7 +63,7 @@ function getSanityImageUrl(assetRef) {
         return ''
     }
 
-    return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${imagePath}`
+    return `https://cdn.sanity.io/images/${sanityImageConfig.projectId}/${sanityImageConfig.dataset}/${imagePath}`
 }
 
 function getPortableTextContent(body) {
