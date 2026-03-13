@@ -18,6 +18,8 @@ function isSourceConfigured(source) {
             source.projectId.length > 0 &&
             typeof source.dataset === 'string' &&
             source.dataset.length > 0 &&
+            typeof source.apiVersion === 'string' &&
+            source.apiVersion.length > 0 &&
             typeof source.query === 'string' &&
             source.query.length > 0
         )
