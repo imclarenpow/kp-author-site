@@ -47,32 +47,39 @@ function NewsPage() {
 
                 {posts.length > 0 ? (
                     <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
-                        {posts.map((post) => (
-                            <li key={post.key} className="news-post-item">
-                                <Card
-                                    className="book news-post-card"
-                                    isInteractive
-                                    isHidden={post.key === hiddenPostKey}
-                                    onActivate={(event, activationElement) =>
-                                        handlePostClick(post, event, activationElement)
-                                    }
-                                    activationLabel={`Open blog post titled ${post.title}`}
-                                >
-                                    <h3 className="title news-post-title">{post.title}</h3>
+                        {posts.map((post) => {
+                            const hasPublishedAt = Boolean(post.publishedAt)
+                            const publishedDate = hasPublishedAt ? new Date(post.publishedAt) : null
+                            const isValidPublishedDate =
+                                hasPublishedAt && publishedDate && !Number.isNaN(publishedDate.getTime())
 
-                                    <p className="book-year news-post-meta">
-                                        <b>Publication Date:</b>{' '}
-                                        {post.publishedAt ? (
-                                            <time dateTime={post.publishedAt}>
-                                                {formatPublishedDate(post.publishedAt)}
-                                            </time>
-                                        ) : (
-                                            'Date not set'
-                                        )}
-                                    </p>
-                                </Card>
-                            </li>
-                        ))}
+                            return (
+                                <li key={post.key} className="news-post-item">
+                                    <Card
+                                        className="book news-post-card"
+                                        isInteractive
+                                        isHidden={post.key === hiddenPostKey}
+                                        onActivate={(event, activationElement) =>
+                                            handlePostClick(post, event, activationElement)
+                                        }
+                                        activationLabel={`Open blog post titled ${post.title}`}
+                                    >
+                                        <h3 className="title news-post-title">{post.title}</h3>
+
+                                        <p className="book-year news-post-meta">
+                                            <b>Publication Date:</b>{' '}
+                                            {isValidPublishedDate ? (
+                                                <time dateTime={post.publishedAt}>
+                                                    {formatPublishedDate(post.publishedAt)}
+                                                </time>
+                                            ) : (
+                                                'Date not set'
+                                            )}
+                                        </p>
+                                    </Card>
+                                </li>
+                            )
+                        })}
                     </ul>
                 ) : null}
             </section>
