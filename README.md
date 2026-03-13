@@ -4,13 +4,6 @@
 
 ## Development Log
 
-### Things to do further along:
-
-- Change the nav references once domain is set up.
-- Add robots.txt information
-- Add sorting to the books
-- Need to add links to purchase books
-
 ### Day 1 - Scoping, Design & Decision Making
 
 #### Decision Making and Scoping
@@ -125,3 +118,6 @@ Shared component architecture, content source abstraction, and modal/news improv
 - Updated card-to-modal trigger behavior so opening animations are driven from full card activation, not only title clicks.
 - Tuned modal open animation math to keep the popup transition visibly clear when card and modal sizes are similar.
 - Added local environment variables in `.env` for Sanity project/dataset/api version configuration.
+
+## Deployment
+Note: env variables go in cloudflare pages.
