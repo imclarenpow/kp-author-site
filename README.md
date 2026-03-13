@@ -40,7 +40,7 @@
 - 1 book's info added to json - need more further down the line.
 - all images have been added and resized so far.
 
-### Day 2
+### 27th December 2024: Day 2
 
 Further development.
 
@@ -52,7 +52,7 @@ Further development.
 - Added to about page
 - Today was to make the pages fit properly on different screens mainly
 
-### Day 3
+### 29th December 2024: Day 3
 
 Further development.
 
@@ -62,7 +62,7 @@ Further development.
 - Added list of articles to about of website
 - Added css to list
 
-### Day 4
+### 30th December 2024: Day 4
 
 Further Development.
 
@@ -71,7 +71,7 @@ Further Development.
 - Added Search Bar for Page
 - Added links to books
 
-### Day 5
+### 31st December 2024: Day 5
 
 Further Development
 
