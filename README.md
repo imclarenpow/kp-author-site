@@ -118,7 +118,7 @@ Shared component architecture, content source abstraction, and modal/news improv
 - Updated card-to-modal trigger behavior so opening animations are driven from full card activation, not only title clicks.
 - Tuned modal open animation math to keep the popup transition visibly clear when card and modal sizes are similar.
 - Added support for local environment variables to configure Sanity project/dataset/API version.
-- Documented required Vite env vars in `.env.example` so contributors can copy it to a local `.env` file.
+- Documented required Vite env vars in this README so contributors can create a local `.env` file.
 
 ## Environment variables
 
@@ -128,10 +128,12 @@ The app expects the following Vite environment variables to be defined (locally 
 - `VITE_SANITY_DATASET`
 - `VITE_SANITY_API_VERSION`
 
-For local development, create a `.env` file in the project root by copying `.env.example` and filling in the values:
+For local development, create a `.env` file in the project root with the following contents, replacing the placeholder values with your own:
 
 ```bash
-cp .env.example .env
+VITE_SANITY_PROJECT_ID=your_project_id
+VITE_SANITY_DATASET=your_dataset
+VITE_SANITY_API_VERSION=2023-10-01
 ```
 
 ## Deployment
