@@ -1,0 +1,43 @@
+.news-modal {
+  width: min(760px, 100%);
+}
+
+.news-modal-content {
+  position: relative;
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.news-modal-body {
+  margin-top: 0.1rem;
+  display: grid;
+  gap: 0.6rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+  line-height: 1.55;
+}
+
+.news-modal-body p {
+  margin: 0;
+}
+
+.news-modal-image-wrapper {
+  margin: 0;
+}
+
+.news-modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #dce5ef;
+  border-radius: 10px;
+  background: #f8fbff;
+}
+
+.news-modal-fallback {
+  margin: 0;
+  color: #28293e;
+  font-style: italic;
+}

@@ -1,4 +1,5 @@
 import './BookCover.css'
+import Card from '../common/Card'
 import { stripHtmlTags, truncateText } from '../../utils/textUtils'
 
 function BookCard({ book, onSelect, isHidden = false }) {
@@ -7,36 +8,14 @@ function BookCard({ book, onSelect, isHidden = false }) {
     const coverSrc = `/assets/img/covers/${book.cover}`
     const isInteractive = typeof onSelect === 'function'
 
-    function handleSelect(event) {
+    function handleSelect(event, activationElement) {
         if (isInteractive && !isHidden) {
-            onSelect(book, event.currentTarget)
-        }
-    }
-
-    function handleKeyDown(event) {
-        if (!isInteractive) {
-            return
-        }
-
-        if (isHidden) {
-            return
-        }
-
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault()
-            onSelect(book, event.currentTarget)
+            onSelect(book, activationElement || event.currentTarget)
         }
     }
 
     return (
-        <article
-            className={`book${isInteractive ? ' book-interactive' : ''}${isHidden ? ' book-hidden' : ''}`}
-            role={isInteractive ? 'button' : undefined}
-            tabIndex={isInteractive ? (isHidden ? -1 : 0) : undefined}
-            aria-hidden={isHidden || undefined}
-            onClick={handleSelect}
-            onKeyDown={handleKeyDown}
-        >
+        <Card className="book" isInteractive={isInteractive} isHidden={isHidden} onActivate={handleSelect}>
             <img src={coverSrc} alt={`${book.title} Cover`} className="book-cover" />
 
             <h2 className="title">{book.title}</h2>
@@ -51,7 +30,7 @@ function BookCard({ book, onSelect, isHidden = false }) {
             </p>
 
             {hasBlurb ? <p className="blurb">{blurbText}</p> : null}
-        </article>
+        </Card>
     )
 }
 
