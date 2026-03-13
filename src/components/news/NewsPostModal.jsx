@@ -1,4 +1,5 @@
 import Modal from '../common/Modal'
+import { formatPublishedDate } from '../../utils/dateUtils'
 import './NewsPostModal.css'
 
 const sanityImageConfig = {
@@ -9,24 +10,6 @@ const sanityImageConfig = {
 export function configureNewsPostModalSanity({ projectId, dataset }) {
     sanityImageConfig.projectId = projectId || ''
     sanityImageConfig.dataset = dataset || ''
-}
-
-function formatPublishedDate(publishedAt) {
-    if (!publishedAt) {
-        return 'Date not set'
-    }
-
-    const parsedDate = new Date(publishedAt)
-
-    if (Number.isNaN(parsedDate.getTime())) {
-        return 'Date not set'
-    }
-
-    return parsedDate.toLocaleDateString('en-NZ', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    })
 }
 
 function getSanityImagePathFromRef(assetRef) {
