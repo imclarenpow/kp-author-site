@@ -117,7 +117,23 @@ Shared component architecture, content source abstraction, and modal/news improv
 - Added `NewsPostModal` (with styling) and updated `NewsPage` to render interactive news cards with modal open/close behavior.
 - Updated card-to-modal trigger behavior so opening animations are driven from full card activation, not only title clicks.
 - Tuned modal open animation math to keep the popup transition visibly clear when card and modal sizes are similar.
-- Added local environment variables in `.env` for Sanity project/dataset/api version configuration.
+- Added support for local environment variables to configure Sanity project/dataset/API version.
+- Documented required Vite env vars in `.env.example` so contributors can copy it to a local `.env` file.
+
+## Environment variables
+
+The app expects the following Vite environment variables to be defined (locally in a `.env` file, and in production on Cloudflare Pages):
+
+- `VITE_SANITY_PROJECT_ID`
+- `VITE_SANITY_DATASET`
+- `VITE_SANITY_API_VERSION`
+
+For local development, create a `.env` file in the project root by copying `.env.example` and filling in the values:
+
+```bash
+cp .env.example .env
+```
 
 ## Deployment
-Note: env variables go in cloudflare pages.
+
+When deploying to Cloudflare Pages, configure the same environment variables (`VITE_SANITY_PROJECT_ID`, `VITE_SANITY_DATASET`, `VITE_SANITY_API_VERSION`) in the project settings.
