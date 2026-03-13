@@ -4,25 +4,8 @@ import NewsPostModal from '../components/news/NewsPostModal'
 import useCardModalController from '../hooks/useCardModalController'
 import useNewsPosts from '../hooks/useNewsPosts'
 import useUniformCardHeight from '../hooks/useUniformCardHeight'
+import { formatPublishedDate } from '../utils/dateUtils'
 import './NewsPage.css'
-
-function formatPublishedDate(publishedAt) {
-    if (!publishedAt) {
-        return 'Date not set'
-    }
-
-    const parsedDate = new Date(publishedAt)
-
-    if (Number.isNaN(parsedDate.getTime())) {
-        return 'Date not set'
-    }
-
-    return parsedDate.toLocaleDateString('en-NZ', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    })
-}
 
 function NewsPage() {
     const { posts, isLoading, errorMessage } = useNewsPosts()
