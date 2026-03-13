@@ -1,6 +1,8 @@
 function buildSanityQueryEndpoint({ projectId, dataset, apiVersion, query }) {
     const encodedQuery = encodeURIComponent(query)
-    return `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}?query=${encodedQuery}`
+    const normalizedApiVersion =
+        typeof apiVersion === 'string' ? apiVersion.replace(/^v/i, '') : apiVersion
+    return `https://${projectId}.api.sanity.io/v${normalizedApiVersion}/data/query/${dataset}?query=${encodedQuery}`
 }
 
 function isSourceConfigured(source) {
