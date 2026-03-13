@@ -46,7 +46,9 @@ function useSourceCollection({
                 setErrorMessage(loadErrorMessage)
                 console.error(`Error loading ${errorLabel}:`, error)
             } finally {
-                setIsLoading(false)
+                if (!abortController.signal.aborted) {
+                    setIsLoading(false)
+                }
             }
         }
 
