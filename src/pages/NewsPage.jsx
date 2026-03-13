@@ -48,10 +48,7 @@ function NewsPage() {
                 {posts.length > 0 ? (
                     <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
                         {posts.map((post) => {
-                            const hasPublishedAt = Boolean(post.publishedAt)
-                            const publishedDate = hasPublishedAt ? new Date(post.publishedAt) : null
-                            const isValidPublishedDate =
-                                hasPublishedAt && publishedDate && !Number.isNaN(publishedDate.getTime())
+                            const formattedPublishedDate = formatPublishedDate(post.publishedAt)
 
                             return (
                                 <li key={post.key} className="news-post-item">
@@ -68,9 +65,9 @@ function NewsPage() {
 
                                         <p className="book-year news-post-meta">
                                             <b>Publication Date:</b>{' '}
-                                            {isValidPublishedDate ? (
-                                                <time dateTime={post.publishedAt}>
-                                                    {formatPublishedDate(post.publishedAt)}
+                                            {formattedPublishedDate ? (
+                                                <time dateTime={post.publishedAt || ''}>
+                                                    {formattedPublishedDate}
                                                 </time>
                                             ) : (
                                                 'Date not set'
