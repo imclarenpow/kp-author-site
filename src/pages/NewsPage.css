@@ -24,6 +24,37 @@
   color: #14281d;
 }
 
+.news-feed-header {
+  width: 100%;
+  margin: 0 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.news-feed-controls {
+  width: auto;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.news-sort-dropdown {
+  width: min(100%, 260px);
+}
+
+@media (max-width: 520px) {
+  .news-feed-controls {
+    width: 100%;
+  }
+
+  .news-sort-dropdown {
+    width: 100%;
+  }
+}
+
 .news-feed-status {
   margin: 0;
   color: #28293e;

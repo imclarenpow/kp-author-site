@@ -1,5 +1,6 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import Card from '../components/common/Card'
+import Dropdown from '../components/common/Dropdown'
 import NewsPostModal from '../components/news/NewsPostModal'
 import useCardModalController from '../hooks/useCardModalController'
 import useNewsPosts from '../hooks/useNewsPosts'
@@ -7,8 +8,66 @@ import useUniformCardHeight from '../hooks/useUniformCardHeight'
 import { formatPublishedDate } from '../utils/dateUtils'
 import './NewsPage.css'
 
+const SORT_OPTIONS = [
+    {
+        value: 'desc',
+        label: 'Newest first',
+    },
+    {
+        value: 'asc',
+        label: 'Oldest first',
+    },
+]
+
+const DEFAULT_SORT_ORDER = SORT_OPTIONS[0].value
+
+function getPublishedTimestamp(post) {
+    if (typeof post?.publishedAt !== 'string') {
+        return null
+    }
+
+    const timestamp = Date.parse(post.publishedAt)
+    return Number.isNaN(timestamp) ? null : timestamp
+}
+
+function comparePostsByPublishedDate(leftPost, rightPost, sortOrder) {
+    const leftTimestamp = getPublishedTimestamp(leftPost)
+    const rightTimestamp = getPublishedTimestamp(rightPost)
+
+    if (leftTimestamp == null && rightTimestamp == null) {
+        const leftTitle = typeof leftPost?.title === 'string' ? leftPost.title : ''
+        const rightTitle = typeof rightPost?.title === 'string' ? rightPost.title : ''
+
+        return leftTitle.localeCompare(rightTitle)
+    }
+
+    if (leftTimestamp == null) {
+        return 1
+    }
+
+    if (rightTimestamp == null) {
+        return -1
+    }
+
+    const timestampDifference =
+        sortOrder === 'asc' ? leftTimestamp - rightTimestamp : rightTimestamp - leftTimestamp
+
+    if (timestampDifference !== 0) {
+        return timestampDifference
+    }
+
+    const leftTitle = typeof leftPost?.title === 'string' ? leftPost.title : ''
+    const rightTitle = typeof rightPost?.title === 'string' ? rightPost.title : ''
+    return leftTitle.localeCompare(rightTitle)
+}
+
 function NewsPage() {
     const { posts, isLoading, errorMessage } = useNewsPosts()
+    const [sortOrder, setSortOrder] = useState(DEFAULT_SORT_ORDER)
+    const sortedPosts = useMemo(
+        () => [...posts].sort((leftPost, rightPost) => comparePostsByPublishedDate(leftPost, rightPost, sortOrder)),
+        [posts, sortOrder],
+    )
     const getPostKey = useCallback((post) => post?.key || '', [])
     const {
         selectedItem: selectedPost,
@@ -23,8 +82,8 @@ function NewsPage() {
     const newsFeedListRef = useUniformCardHeight({
         cardSelector: '.news-post-card',
         cssVarName: '--news-post-card-height',
-        items: posts,
-        enabled: posts.length > 0,
+        items: sortedPosts,
+        enabled: sortedPosts.length > 0,
     })
 
     function handlePostClick(post, event, activationElement) {
@@ -34,20 +93,34 @@ function NewsPage() {
     return (
         <section className="page-container news-page-container">
             <section className="news-feed" aria-labelledby="news-feed-title">
-                <h2 id="news-feed-title" className="news-feed-title">
-                    Blog Posts
-                </h2>
+                <div className="news-feed-header">
+                    <h2 id="news-feed-title" className="news-feed-title">
+                        Blog Posts
+                    </h2>
+
+                    <div className="news-feed-controls">
+                        <Dropdown
+                            id="news-post-sort-order"
+                            className="news-sort-dropdown"
+                            ariaLabel="Sort blog posts by publication date"
+                            value={sortOrder}
+                            onChange={setSortOrder}
+                            options={SORT_OPTIONS}
+                            disabled={isLoading || Boolean(errorMessage) || posts.length < 2}
+                        />
+                    </div>
+                </div>
 
                 {isLoading ? <p className="news-feed-status">Loading posts...</p> : null}
                 {errorMessage ? <p className="news-feed-status">{errorMessage}</p> : null}
 
-                {!isLoading && !errorMessage && posts.length === 0 ? (
+                {!isLoading && !errorMessage && sortedPosts.length === 0 ? (
                     <p className="news-feed-status">No posts found yet.</p>
                 ) : null}
 
-                {posts.length > 0 ? (
+                {sortedPosts.length > 0 ? (
                     <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
-                        {posts.map((post) => {
+                        {sortedPosts.map((post) => {
                             const hasPublishedAt = Boolean(post.publishedAt)
                             const publishedDate = hasPublishedAt ? new Date(post.publishedAt) : null
                             const isValidPublishedDate =
