@@ -29,7 +29,11 @@ function Dropdown({
     const dropdownClassName = ['dropdown', className].filter(Boolean).join(' ')
     const generatedId = useId()
     const normalizedId =
-        typeof id === 'string' && id.trim() === '' ? undefined : id
+        typeof id === 'string'
+            ? id.trim() === ''
+                ? undefined
+                : id.trim()
+            : undefined
     const selectId = normalizedId ?? generatedId
 
     const normalizedOptions = useMemo(() => {
