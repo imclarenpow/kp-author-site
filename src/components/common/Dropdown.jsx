@@ -1,5 +1,5 @@
 import './Dropdown.css'
-import { useId } from 'react'
+import { useId, useMemo } from 'react'
 
 function Dropdown({
     id,
@@ -32,6 +32,25 @@ function Dropdown({
         typeof id === 'string' && id.trim() === '' ? undefined : id
     const selectId = normalizedId ?? generatedId
 
+    const normalizedOptions = useMemo(() => {
+        const seenValues = new Set()
+        const uniqueOptions = []
+
+        for (const option of options) {
+            const optionValue = option?.value
+            if (typeof optionValue !== 'string') {
+                continue
+            }
+            if (seenValues.has(optionValue)) {
+                continue
+            }
+            seenValues.add(optionValue)
+            uniqueOptions.push(option)
+        }
+
+        return uniqueOptions
+    }, [options])
+
     return (
         <div className={dropdownClassName}>
             {label ? (
@@ -49,32 +68,19 @@ function Dropdown({
                     onChange={handleChange}
                     disabled={disabled}
                 >
-                    {options
-                        .filter((option, index, allOptions) => {
-                            if (typeof option?.value !== 'string') {
-                                return false
-                            }
+                    {normalizedOptions.map((option) => {
+                        const optionValue = option.value
+                        const optionLabel =
+                            typeof option?.label === 'string'
+                                ? option.label
+                                : optionValue
 
-                            // Ensure uniqueness by value: keep only the first occurrence
-                            return (
-                                allOptions.findIndex(
-                                    (other) => other?.value === option.value
-                                ) === index
-                            )
-                        })
-                        .map((option) => {
-                            const optionValue = option.value
-                            const optionLabel =
-                                typeof option?.label === 'string'
-                                    ? option.label
-                                    : optionValue
-
-                            return (
-                                <option key={optionValue} value={optionValue}>
-                                    {optionLabel}
-                                </option>
-                            )
-                        })}
+                        return (
+                            <option key={optionValue} value={optionValue}>
+                                {optionLabel}
+                            </option>
+                        )
+                    })}
                 </select>
             </div>
         </div>
