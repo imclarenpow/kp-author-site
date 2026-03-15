@@ -11,7 +11,13 @@ function Dropdown({
     className = '',
     disabled = false,
 }) {
-    if (process.env.NODE_ENV !== 'production' && !label && !ariaLabel) {
+    if (
+        typeof import.meta !== 'undefined' &&
+        import.meta.env &&
+        import.meta.env.DEV &&
+        !label &&
+        !ariaLabel
+    ) {
         // Ensure Dropdown is always given an accessible name
         // via either a visible label or an aria-label.
         // eslint-disable-next-line no-console
