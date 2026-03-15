@@ -37,16 +37,25 @@ function Dropdown({
                     onChange={handleChange}
                     disabled={disabled}
                 >
-                    {options.map((option) => {
-                        const optionValue = typeof option?.value === 'string' ? option.value : ''
-                        const optionLabel = typeof option?.label === 'string' ? option.label : optionValue
-
-                        return (
-                            <option key={optionValue} value={optionValue}>
-                                {optionLabel}
-                            </option>
+                    {options
+                        .filter(
+                            (option) =>
+                                typeof option?.value === 'string' &&
+                                option.value !== ''
                         )
-                    })}
+                        .map((option) => {
+                            const optionValue = option.value
+                            const optionLabel =
+                                typeof option?.label === 'string'
+                                    ? option.label
+                                    : optionValue
+
+                            return (
+                                <option key={optionValue} value={optionValue}>
+                                    {optionLabel}
+                                </option>
+                            )
+                        })}
                 </select>
             </div>
         </div>
