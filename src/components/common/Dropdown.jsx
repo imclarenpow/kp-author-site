@@ -39,11 +39,21 @@ function Dropdown({
                     disabled={disabled}
                 >
                     {options
-                        .filter(
-                            (option) =>
-                                typeof option?.value === 'string' &&
-                                option.value !== ''
-                        )
+                        .filter((option, index, allOptions) => {
+                            if (
+                                typeof option?.value !== 'string' ||
+                                option.value === ''
+                            ) {
+                                return false
+                            }
+
+                            // Ensure uniqueness by value: keep only the first occurrence
+                            return (
+                                allOptions.findIndex(
+                                    (other) => other?.value === option.value
+                                ) === index
+                            )
+                        })
                         .map((option) => {
                             const optionValue = option.value
                             const optionLabel =
