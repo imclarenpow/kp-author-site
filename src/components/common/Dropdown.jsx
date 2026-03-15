@@ -11,6 +11,15 @@ function Dropdown({
     className = '',
     disabled = false,
 }) {
+    if (process.env.NODE_ENV !== 'production' && !label && !ariaLabel) {
+        // Ensure Dropdown is always given an accessible name
+        // via either a visible label or an aria-label.
+        // eslint-disable-next-line no-console
+        console.error(
+            'Dropdown: Accessible name is missing. Please provide either a `label` or `ariaLabel` prop.'
+        )
+    }
+
     function handleChange(event) {
         if (typeof onChange === 'function') {
             onChange(event.target.value, event)
