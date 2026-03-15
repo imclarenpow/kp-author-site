@@ -22,10 +22,10 @@ function AboutPage() {
             <div id="about-text">
                 <h2>About Keryn</h2>
                 <p>
-                    Keryn mainly writes YA fiction. She has been writing / scribbling /
-                    journaling most of her life, but began to write more intentionally in 2016.
-                    She lives in the beautiful Hawkes Bay with her husband, children, dog and
-                    part time cat (his choice). When she is not writing she works as a GP.
+                    Keryn writes for both young adults and adults.
+                    Her first young adult novel, 'Before the Rising', publ. 2022, has a sequel brewing and another manuscript, 'Fight', was longlisted for the Laura Solomon Cuba Press Prize 2025. There is also a sequel underway for 'Fight'.
+                    She also has recently completed a draft of the first in a planned adult crime series (working title 'Old Flames') set in small town New Zealand.
+                    Keryn lives in Napier with her husband and an assortment of children and animals. When she's not working as a GP or writing, she enjoys reading, gardening, playing violin in a community orchestra, and avoiding housework.
                 </p>
 
                 <h3>Links to Reviews and Interviews</h3>
