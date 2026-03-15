@@ -28,7 +28,9 @@ function Dropdown({
 
     const dropdownClassName = ['dropdown', className].filter(Boolean).join(' ')
     const generatedId = useId()
-    const selectId = id ?? generatedId
+    const normalizedId =
+        typeof id === 'string' && id.trim() === '' ? undefined : id
+    const selectId = normalizedId ?? generatedId
 
     return (
         <div className={dropdownClassName}>
