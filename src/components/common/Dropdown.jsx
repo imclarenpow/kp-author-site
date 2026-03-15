@@ -1,4 +1,5 @@
 import './Dropdown.css'
+import { useId } from 'react'
 
 function Dropdown({
     id,
@@ -17,18 +18,19 @@ function Dropdown({
     }
 
     const dropdownClassName = ['dropdown', className].filter(Boolean).join(' ')
+    const selectId = id ?? useId()
 
     return (
         <div className={dropdownClassName}>
             {label ? (
-                <label className="dropdown-label" htmlFor={id}>
+                <label className="dropdown-label" htmlFor={selectId}>
                     {label}
                 </label>
             ) : null}
 
             <div className="dropdown-select-wrapper">
                 <select
-                    id={id}
+                    id={selectId}
                     className="dropdown-select"
                     aria-label={ariaLabel || label || undefined}
                     value={value}
