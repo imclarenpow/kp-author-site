@@ -30,9 +30,11 @@ function getPublishedTimestamp(post) {
     return Number.isNaN(timestamp) ? null : timestamp
 }
 
-function comparePostsByPublishedDate(leftPost, rightPost, sortOrder) {
-    const leftTimestamp = getPublishedTimestamp(leftPost)
-    const rightTimestamp = getPublishedTimestamp(rightPost)
+function comparePostsByPublishedDateWithTimestamps(leftEntry, rightEntry, sortOrder) {
+    const leftTimestamp = leftEntry.publishedTimestamp
+    const rightTimestamp = rightEntry.publishedTimestamp
+    const leftPost = leftEntry.post
+    const rightPost = rightEntry.post
 
     if (leftTimestamp == null && rightTimestamp == null) {
         const leftTitle = typeof leftPost?.title === 'string' ? leftPost.title : ''
@@ -64,10 +66,18 @@ function comparePostsByPublishedDate(leftPost, rightPost, sortOrder) {
 function NewsPage() {
     const { posts, isLoading, errorMessage } = useNewsPosts()
     const [sortOrder, setSortOrder] = useState(DEFAULT_SORT_ORDER)
-    const sortedPosts = useMemo(
-        () => [...posts].sort((leftPost, rightPost) => comparePostsByPublishedDate(leftPost, rightPost, sortOrder)),
-        [posts, sortOrder],
-    )
+    const sortedPosts = useMemo(() => {
+        const postsWithTimestamps = posts.map((post) => ({
+            post,
+            publishedTimestamp: getPublishedTimestamp(post),
+        }))
+
+        postsWithTimestamps.sort((leftEntry, rightEntry) =>
+            comparePostsByPublishedDateWithTimestamps(leftEntry, rightEntry, sortOrder),
+        )
+
+        return postsWithTimestamps.map((entry) => entry.post)
+    }, [posts, sortOrder])
     const getPostKey = useCallback((post) => post?.key || '', [])
     const {
         selectedItem: selectedPost,
