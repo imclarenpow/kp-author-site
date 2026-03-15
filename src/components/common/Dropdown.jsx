@@ -49,10 +49,7 @@ function Dropdown({
                 >
                     {options
                         .filter((option, index, allOptions) => {
-                            if (
-                                typeof option?.value !== 'string' ||
-                                option.value === ''
-                            ) {
+                            if (typeof option?.value !== 'string') {
                                 return false
                             }
 
