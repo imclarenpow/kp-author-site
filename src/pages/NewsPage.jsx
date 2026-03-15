@@ -132,7 +132,7 @@ function NewsPage() {
                     <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
                         {sortedPosts.map((post) => {
                             const publishedTimestamp = getPublishedTimestamp(post)
-                            const isValidPublishedDate = !Number.isNaN(publishedTimestamp)
+                            const isValidPublishedDate = publishedTimestamp != null
 
                             return (
                                 <li key={post.key} className="news-post-item">
