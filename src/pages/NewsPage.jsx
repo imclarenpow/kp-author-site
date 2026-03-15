@@ -131,8 +131,7 @@ function NewsPage() {
                 {sortedPosts.length > 0 ? (
                     <ul ref={newsFeedListRef} className="news-feed-list" aria-live="polite">
                         {sortedPosts.map((post) => {
-                            const publishedTimestamp = getPublishedTimestamp(post)
-                            const isValidPublishedDate = publishedTimestamp != null
+                            const isValidPublishedDate = Boolean(post.publishedAt)
 
                             return (
                                 <li key={post.key} className="news-post-item">
