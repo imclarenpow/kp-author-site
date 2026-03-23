@@ -6,6 +6,7 @@ import useCardModalController from '../hooks/useCardModalController'
 import useNewsPosts from '../hooks/useNewsPosts'
 import useUniformCardHeight from '../hooks/useUniformCardHeight'
 import { formatPublishedDate } from '../utils/dateUtils'
+import { compareTitles } from '../utils/sortUtils'
 import './NewsPage.css'
 
 const SORT_OPTIONS = [
@@ -40,7 +41,7 @@ function comparePostsByPublishedDateWithTimestamps(leftEntry, rightEntry, sortOr
         const leftTitle = typeof leftPost?.title === 'string' ? leftPost.title : ''
         const rightTitle = typeof rightPost?.title === 'string' ? rightPost.title : ''
 
-        return leftTitle.localeCompare(rightTitle)
+        return compareTitles(leftTitle, rightTitle, { sensitivity: 'variant' })
     }
 
     if (leftTimestamp == null) {
@@ -60,7 +61,7 @@ function comparePostsByPublishedDateWithTimestamps(leftEntry, rightEntry, sortOr
 
     const leftTitle = typeof leftPost?.title === 'string' ? leftPost.title : ''
     const rightTitle = typeof rightPost?.title === 'string' ? rightPost.title : ''
-    return leftTitle.localeCompare(rightTitle)
+    return compareTitles(leftTitle, rightTitle, { sensitivity: 'variant' })
 }
 
 function NewsPage() {

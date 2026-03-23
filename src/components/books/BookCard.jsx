@@ -1,11 +1,12 @@
 import './BookCover.css'
 import Card from '../common/Card'
 import { stripHtmlTags, truncateText } from '../../utils/textUtils'
+import { getBookCoverSrc } from '../../utils/bookUtils'
 
 function BookCard({ book, onSelect, isHidden = false }) {
     const blurbText = truncateText(stripHtmlTags(book.blurb), 60)
     const hasBlurb = Boolean(blurbText)
-    const coverSrc = `/assets/img/covers/${book.cover}`
+    const coverSrc = getBookCoverSrc(book.cover)
     const isInteractive = typeof onSelect === 'function'
 
     function handleSelect(event, activationElement) {
