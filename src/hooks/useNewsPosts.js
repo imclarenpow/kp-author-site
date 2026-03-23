@@ -1,7 +1,5 @@
-import { useMemo } from 'react'
-import { DEFAULT_NEWS_QUERY, createNewsSource } from '../config/contentSources'
-import { getSourceKey } from '../utils/contentSourceClient'
-import useSourceCollection from './useSourceCollection'
+import { DEFAULT_NEWS_QUERY } from '../config/contentSources'
+import useSanityCollection from './useSanityCollection'
 
 const LOAD_ERROR_MESSAGE = 'Unable to load news posts right now.'
 const MISSING_CONFIG_MESSAGE = 'Sanity news is not configured yet.'
@@ -32,20 +30,11 @@ function useNewsPosts(options = {}) {
     const sanityDataset = options.sanityDataset
     const sanityApiVersion = options.sanityApiVersion
     const newsQuery = options.newsQuery || DEFAULT_NEWS_QUERY
-    const newsSource = useMemo(
-        () =>
-            createNewsSource({
-                sanityProjectId,
-                sanityDataset,
-                sanityApiVersion,
-                newsQuery,
-            }),
-        [newsQuery, sanityApiVersion, sanityDataset, sanityProjectId],
-    )
-    const newsSourceKey = useMemo(() => getSourceKey(newsSource), [newsSource])
-    const { items, isLoading, errorMessage } = useSourceCollection({
-        source: newsSource,
-        sourceKey: newsSourceKey,
+    const { items, isLoading, errorMessage } = useSanityCollection({
+        sanityProjectId,
+        sanityDataset,
+        sanityApiVersion,
+        query: newsQuery,
         parsePayload: normalizePosts,
         loadErrorMessage: LOAD_ERROR_MESSAGE,
         missingConfigMessage: MISSING_CONFIG_MESSAGE,

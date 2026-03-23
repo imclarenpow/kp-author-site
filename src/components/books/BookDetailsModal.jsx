@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import Modal from '../common/Modal'
 import ExternalLink from '../links/ExternalLink'
+import { getBookCoverSrc } from '../../utils/bookUtils'
 import './BookCover.css'
 import './BookDetailsModal.css'
 
@@ -11,7 +12,7 @@ function BookDetailsModal({ book, originRect, isClosing, onClose }) {
         return null
     }
 
-    const coverSrc = `/assets/img/covers/${book.cover}`
+    const coverSrc = getBookCoverSrc(book.cover)
     const hasPrimaryLink = Boolean(book.link1 && book.link1name)
     const hasSecondaryLink = Boolean(book.link2 && book.link2name)
     const hasBlurb = Boolean(book.blurb)
