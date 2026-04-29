@@ -5,6 +5,19 @@ import useSanityCollection from './useSanityCollection'
 const LOAD_ERROR_MESSAGE = 'Unable to load books right now.'
 const MISSING_CONFIG_MESSAGE = 'Sanity books are not configured yet.'
 const FALLBACK_COVER_FILENAME = 'temp.png'
+const ALLOWED_URL_SCHEMES = ['https:', 'http:', 'mailto:']
+
+function isSafeUrl(url) {
+    if (typeof url !== 'string' || url.trim().length === 0) {
+        return false
+    }
+    try {
+        const parsed = new URL(url)
+        return ALLOWED_URL_SCHEMES.includes(parsed.protocol)
+    } catch {
+        return false
+    }
+}
 
 function normalizeBooks(payload) {
     if (!Array.isArray(payload?.result)) {
@@ -33,9 +46,9 @@ function normalizeBooks(payload) {
                 typeof book?.coverImageUrl === 'string' && book.coverImageUrl.length > 0
                     ? book.coverImageUrl
                     : FALLBACK_COVER_FILENAME,
-            link1: primaryLink?.url || '',
+            link1: isSafeUrl(primaryLink?.url) ? primaryLink?.url : '',
             link1name: primaryLink?.label || '',
-            link2: secondaryLink?.url || '',
+            link2: isSafeUrl(secondaryLink?.url) ? secondaryLink?.url : '',
             link2name: secondaryLink?.label || '',
         }
     })
