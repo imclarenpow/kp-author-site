@@ -3,15 +3,27 @@ export function getBookKey(book) {
 }
 
 export function getBookCoverSrc(cover) {
-    if (typeof cover !== 'string' || cover.length === 0) {
-        return ''
+    const fallbackCoverSrc = '/assets/img/covers/temp.png'
+
+    if (typeof cover !== 'string') {
+        return fallbackCoverSrc
     }
 
-    if (/^https?:\/\//i.test(cover)) {
-        return cover
+    const normalizedCover = cover.trim()
+
+    if (normalizedCover.length === 0) {
+        return fallbackCoverSrc
     }
 
-    return `/assets/img/covers/${cover}`
+    if (/^https?:\/\//i.test(normalizedCover)) {
+        return normalizedCover
+    }
+
+    if (normalizedCover.startsWith('/')) {
+        return normalizedCover
+    }
+
+    return `/assets/img/covers/${normalizedCover}`
 }
 
 export function getElementRect(element) {
