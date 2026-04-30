@@ -14,6 +14,19 @@ on:
         type: string
 
 jobs:
+  debug:
+    name: Debug Deployment Event
+    if: github.event_name == 'deployment_status'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deployment info
+        run: |
+          echo "event_name: ${{ github.event_name }}"
+          echo "deployment.ref: ${{ github.event.deployment.ref }}"
+          echo "deployment_status.state: ${{ github.event.deployment_status.state }}"
+          echo "deployment_status.environment_url: ${{ github.event.deployment_status.environment_url }}"
+          echo "deployment_status.environment: ${{ github.event.deployment_status.environment }}"
+
   test:
     name: Run Playwright Tests
     if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && (((github.event.deployment.ref == 'develop' || github.event.deployment.ref == 'refs/heads/develop') && startsWith(github.event.deployment_status.environment_url, 'https://develop.kp-author-site.pages.dev')) || ((github.event.deployment.ref == 'main' || github.event.deployment.ref == 'refs/heads/main') && (startsWith(github.event.deployment_status.environment_url, 'https://kp-author-site.pages.dev') || startsWith(github.event.deployment_status.environment_url, 'https://kerynpowellauthor.nz') || startsWith(github.event.deployment_status.environment_url, 'https://www.kerynpowellauthor.nz'))))) || (github.event_name == 'check_run' && github.event.check_run.conclusion == 'success' && (contains(github.event.check_run.name, 'Cloudflare') || contains(github.event.check_run.app.name, 'Cloudflare')) && (github.event.check_run.check_suite.head_branch == 'develop' || github.event.check_run.check_suite.head_branch == 'main')) }}
