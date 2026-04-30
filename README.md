@@ -1,92 +1,128 @@
-# Repo for Metamorph / Keryn Powell Author Website
+# Keryn Powell Author Website
 
-[Site Preview](https://html-preview.github.io/?url=https://github.com/imclarenpow/kp-author-site/blob/main/index.html)
+> Repo for Metamorph / Keryn Powell Author Website
+
+**[Site Preview](https://html-preview.github.io/?url=https://github.com/imclarenpow/kp-author-site/blob/main/index.html)**
+
+---
+
+## Environment Variables
+
+The app expects the following Vite environment variables to be defined (locally in a `.env` file, and in production on Cloudflare Pages):
+
+| Variable | Description |
+|---|---|
+| `VITE_SANITY_PROJECT_ID` | Your Sanity project ID |
+| `VITE_SANITY_DATASET` | Your Sanity dataset name |
+| `VITE_SANITY_API_VERSION` | Sanity API version (e.g. `2023-10-01`) |
+
+For local development, create a `.env` file in the project root with the following contents, replacing the placeholder values with your own:
+
+```bash
+VITE_SANITY_PROJECT_ID=your_project_id
+VITE_SANITY_DATASET=your_dataset
+VITE_SANITY_API_VERSION=2023-10-01
+```
+
+## Deployment
+
+When deploying to Cloudflare Pages, configure the same environment variables (`VITE_SANITY_PROJECT_ID`, `VITE_SANITY_DATASET`, `VITE_SANITY_API_VERSION`) in the project settings.
+
+---
 
 ## Development Log
 
-### Day 1 - Scoping, Design & Decision Making
+### Day 1 — Scoping, Design & Decision Making
 
-#### Decision Making and Scoping
+**Decision Making and Scoping**
 
 - Decided on static site hosted on Github Pages making use of 3rd party services such as mailchimp and go daddy for routing and email subscription handling
 - Main reason for this is to keep costs as low as possible. Due to the scope of the website anything else would probably be a bit overkill.
 - "Backend" is more likely just going to be a script calling json files from a repository.
 - This will keep the project very cost effective.
 
-* Noted possible issues - browser caching - will need to figure out a way to make this still work (version number files?).
+> **Note:** Possible issues with browser caching — will need to figure out a way to make this still work (version number files?).
 
-#### Design
+**Design**
 
 - Spoke to Mum, will use simple web design for easy navigation.
 - Will use good contrasting colour palette
 - All book covers should be 100px wide
 
-#### Familiarisation
+**Familiarisation**
 
 - Added some files to test how GitHub pages works. Many thanks to Stack Overflow for providing this info.
 
-#### Progress Made
+**Progress Made**
 
 - Created boilerplate elements such as the navbar in html.
 - Resized image assets that will be used.
 - Spoken to Mum about what information we need and created a mock design for the homepage.
 - Set up a mailchimp account to manage newsletter.
-- created a colour palette
-- Social Media Links to page.
+- Created a colour palette
+- Social media links to page.
 - Added necessary files that will be added to in time such as the stylesheet and robots file.
 - Script to populate book section on site based on what has been added to the json.
-- css for page header
-- css for footer (not that important)
-- 1 book's info added to json - need more further down the line.
-- all images have been added and resized so far.
+- CSS for page header
+- CSS for footer (not that important)
+- 1 book's info added to json — need more further down the line.
+- All images have been added and resized so far.
 
-### 27th December 2024: Day 2
+---
+
+### 27th December 2024 — Day 2
 
 Further development.
 
-#### Progress Made
+**Progress Made**
 
-- Added css to books on front page.
-- Added css to newsletter signup
-- Added show more / less link and some css around it.
+- Added CSS to books on front page.
+- Added CSS to newsletter signup
+- Added show more / less link and some CSS around it.
 - Added to about page
 - Today was to make the pages fit properly on different screens mainly
 
-### 29th December 2024: Day 3
+---
+
+### 29th December 2024 — Day 3
 
 Further development.
 
-#### Progress Made
+**Progress Made**
 
-- Changed header h1 from justify-self to text-align to fix issue where header displayed on left on mobile.
+- Changed header h1 from `justify-self` to `text-align` to fix issue where header displayed on left on mobile.
 - Added list of articles to about of website
-- Added css to list
+- Added CSS to list
 
-### 30th December 2024: Day 4
+---
 
-Further Development.
+### 30th December 2024 — Day 4
 
-#### Progress Made
+Further development.
 
-- Added Search Bar for Page
+**Progress Made**
+
+- Added search bar for page
 - Added links to books
 
-### 31st December 2024: Day 5
+---
 
-Further Development
+### 31st December 2024 — Day 5
 
-#### Progress Made
+Further development.
 
-- Added Grid css for books
+**Progress Made**
+
+- Added grid CSS for books
 - Changed around how the search bar appears
 - Cleaned up CSS somewhat
 - still cracking
 
-### 7th March 2026
+---
 
-React app migration and tidy-up.
+### 7th March 2026 — React Migration & Tidy-up
 
-#### Progress Made
+**Progress Made**
 
 - Refactored the React app into a reusable structure using layouts, pages, and shared components.
 - Added route-based navigation (`/`, `/about`, `/news`) and a not-found page.
@@ -102,11 +138,11 @@ React app migration and tidy-up.
 - Added subtle border-radius styling to book cards/images.
 - Removed unused code (`BookSearchBar` component) and validated with lint/build.
 
-### 11th March 2026
+---
 
-Shared component architecture, content source abstraction, and modal/news improvements.
+### 11th March 2026 — Shared Components, Content Source Abstraction & Modal/News Improvements
 
-#### Progress Made
+**Progress Made**
 
 - Added reusable shared UI primitives: `Card` and `Modal` components with dedicated styles in `src/components/common/`.
 - Refactored the books flow to use shared primitives (`BookCard`, `BookDetailsModal`) and centralized modal behavior.
@@ -119,23 +155,3 @@ Shared component architecture, content source abstraction, and modal/news improv
 - Tuned modal open animation math to keep the popup transition visibly clear when card and modal sizes are similar.
 - Added support for local environment variables to configure Sanity project/dataset/API version.
 - Documented required Vite env vars in this README so contributors can create a local `.env` file.
-
-## Environment variables
-
-The app expects the following Vite environment variables to be defined (locally in a `.env` file, and in production on Cloudflare Pages):
-
-- `VITE_SANITY_PROJECT_ID`
-- `VITE_SANITY_DATASET`
-- `VITE_SANITY_API_VERSION`
-
-For local development, create a `.env` file in the project root with the following contents, replacing the placeholder values with your own:
-
-```bash
-VITE_SANITY_PROJECT_ID=your_project_id
-VITE_SANITY_DATASET=your_dataset
-VITE_SANITY_API_VERSION=2023-10-01
-```
-
-## Deployment
-
-When deploying to Cloudflare Pages, configure the same environment variables (`VITE_SANITY_PROJECT_ID`, `VITE_SANITY_DATASET`, `VITE_SANITY_API_VERSION`) in the project settings.
